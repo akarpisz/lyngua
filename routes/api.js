@@ -17,11 +17,13 @@ router.delete("/api/:user/translation/:id", (req, res)=>{
     //more here
 });
 //update translation (basically only for favoriting)
-router.
+router.put("/api/:user/translation/:id", (req, res)=>{
+    
+})
 
 //user routes
 //get user data
-router.get("/api/:username?", 
+router.get("/api/:username", 
 //isAuthenticated, 
 (req,res)=>{
 

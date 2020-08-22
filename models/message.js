@@ -34,5 +34,5 @@ const MsgSchema = new Schema({
   ],
 });
 //initalize schema below;
-const Message = mongoose.model(MsgSchema, "Message");
+const Message = mongoose.model("Message", MsgSchema);
 module.exports = Message;
