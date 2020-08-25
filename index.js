@@ -1,4 +1,5 @@
 const express = require("express");
+const session = require("express-session");
 const mongoose = require("mongoose");
 const logger = require("morgan");
 const path = require("path");
@@ -6,6 +7,7 @@ const app = express();
 const routes = require("./routes/api");
 const PORT = process.env.PORT || 3001;
 const passport =require("./config/passport");
+
 require("dotenv").config(path.join(__dirname, "/.env"));
 
 mongoose.set('useCreateIndex', true)
@@ -17,6 +19,7 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/lyngua")
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(session({ secret: process.env.SECRET, resave: true, saveUninitialized: true }));
 //change to client/build for production
 app.use(express.static(path.join(__dirname, "client/public")));
 app.use(express.urlencoded({ extended: true}));
