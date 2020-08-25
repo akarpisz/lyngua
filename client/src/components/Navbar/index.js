@@ -26,13 +26,11 @@ const TopMenu = (props) => {
   //const { id } = useParams();
   return (
     <div>
-      <Router>
+      
         <Navbar color="dark" light expand="md">
-          <NavbarBrand id="brand">
-            <Link to="/">
+          <NavbarBrand id="brand" href="/">
               <img src={navbarL} alt="logo L" id="nav-L" />
               yngua
-            </Link>
           </NavbarBrand>
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar>
@@ -75,7 +73,7 @@ const TopMenu = (props) => {
             </Nav>
           </Collapse>
         </Navbar>
-      </Router>
+    
     </div>
   );
 };

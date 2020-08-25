@@ -1,3 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Russo+One&display=swap");
+
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -5,21 +9,22 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  background: linear-gradient(
+  background: rgb(14, 3, 114);
+  /* background: linear-gradient(
     0deg,
     rgb(15, 15, 15) 0%,
     rgba(10, 17, 122, 0.91) 33%,
     rgb(14, 3, 114) 66%,
     rgb(19, 6, 206) 100%
-  );
+  ); */
 }
 
 footer {
   background-color: black;
   color: grey;
 }
-.jumbotron {
+
+#jumbotron {
   background-color: black;
 }
 
@@ -35,8 +40,6 @@ h3 {
   text-align: center;
 }
 
-@import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Russo+One&display=swap");
 
 #brand {
   font-family: "Russo One", "Lobster";
@@ -49,6 +52,7 @@ div.drop.dropdown-menu {
 .translate {
   height: 75%;
   width: 75%;
+  align-content: center;
 }
 #signup {
   color: white;
@@ -72,7 +76,15 @@ div.drop.dropdown-menu {
   width: 10%;
   padding-bottom: 3%;
 }
-
+#root {
+  background: rgb(14, 3, 114);
+  height:100%;
+}
 .intro {
   padding: 0.5em;
+  border-style: groove;
+  border-radius: 20%;
+  color: white;
+  background-color: black;
+  font-family: 'Russo One';
 }

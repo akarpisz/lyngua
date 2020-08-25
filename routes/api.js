@@ -43,6 +43,11 @@ router.post("/api/signup", (req,res)=>{
 
 });
 
+//user signin
+router.get("/api/login", (req, res) => {
+
+});
+
 //message routes (*deep breaths*)
 //user getting their messages
 router.get("/api/messages/:userid", (req,res)=>{
@@ -54,6 +59,7 @@ router.post("/api/messages/:to/:from", (req, res)=>{
 
 });
 
+router.put("/api/messagee")
 //user deleting conversation. maybe
 router.delete("/api/messages/:to/:from", (req, res)=>{
 
