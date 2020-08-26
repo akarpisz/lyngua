@@ -30,6 +30,12 @@ const MsgSchema = new Schema({
         type: Date,
         required: true,
       },
+      read: {
+        type: Boolean,
+        required: true,
+        default: false
+
+      }
     },
   ],
 });

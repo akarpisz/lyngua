@@ -1,15 +1,17 @@
 const express = require("express");
-const session = require("express-session");
+
 const mongoose = require("mongoose");
 const logger = require("morgan");
 const path = require("path");
 const app = express();
-const routes = require("./routes/api");
+const api = require("./routes/api");
+// const auth = require('./routes/auth');
 const PORT = process.env.PORT || 3001;
-const passport =require("./config/passport");
-
+const passport = require("./config/passport");
+const passportJWT = require('passport-jwt');
+const jwt = require('jsonwebtoken');
 require("dotenv").config(path.join(__dirname, "/.env"));
-
+const cors = require('cors');
 mongoose.set('useCreateIndex', true)
 mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
@@ -18,14 +20,15 @@ mongoose.set('useFindAndModify', false);
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/lyngua")
 
 app.use(passport.initialize());
-app.use(passport.session());
-app.use(session({ secret: process.env.SECRET, resave: true, saveUninitialized: true }));
+app.use(cors());
+
 //change to client/build for production
 app.use(express.static(path.join(__dirname, "client/public")));
 app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
 app.use(logger("dev"));
-app.use("/api",routes);
+app.use("/api", api);
+// app.use("/auth", auth)
 
 app.listen(PORT, ()=>{
     console.log(`App started, server listening on port ${PORT}`);
