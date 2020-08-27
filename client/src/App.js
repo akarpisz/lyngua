@@ -18,6 +18,7 @@ function App() {
         </Route>
         <Route path="/login">
         <Login />
+        {/* if(authenticated) ...load userhome *checks auth, reroutes to login* */}
         </Route>
         <Route path="/signup">
           <Signup />

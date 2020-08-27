@@ -1,17 +1,18 @@
 const express = require("express");
-
 const mongoose = require("mongoose");
 const logger = require("morgan");
 const path = require("path");
 const app = express();
 const api = require("./routes/api");
 // const auth = require('./routes/auth');
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 5001;
 const passport = require("./config/passport");
 const passportJWT = require('passport-jwt');
 const jwt = require('jsonwebtoken');
 require("dotenv").config(path.join(__dirname, "/.env"));
 const cors = require('cors');
+
+
 mongoose.set('useCreateIndex', true)
 mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
