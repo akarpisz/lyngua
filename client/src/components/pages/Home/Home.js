@@ -1,12 +1,11 @@
 import React from "react";
-
 import translate from "../../images/translate.jpg";
-import { Card, CardText, Jumbotron, Container, Row, Col } from 'reactstrap';
+import { Card, CardText, Jumbotron, Row, Col } from 'reactstrap';
 
 const Home = () => {
   return (
-    <>
-    <Container id="main">
+    <div id="main">
+    
       <Row>
         <Col>
           <Jumbotron id="jumbotron">
@@ -42,8 +41,8 @@ const Home = () => {
         &copy; 2020 Andrew A.K. | All Rights Reserved
         <br/>
       </footer>
-    </Container>
-    </>
+    
+    </div>
   );
 };
 export default Home;

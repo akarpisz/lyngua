@@ -1,36 +1,90 @@
-import React, { useState, useEffect } from 'react';
-import API from '../../util/API';
-import {Container, Row, Col} from 'reactstrap';
+import React, { useState, useEffect } from "react";
+import API from "../../util/API";
+import {useHistory} from 'react-router-dom';
+import { Jumbotron, Row, Col, CardTitle, Card, CardBody, Button } from "reactstrap";
 
 const UserHome = () => {
+    const history = useHistory();
+  const [userInfo, setUserInfo] = useState({
+    id: "",
+    username: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+  });
 
-    const [userInfo, setUserInfo] = useState({
-        id:"",
-        username: "",
-        firstName:"",
-        lastName:"",
-    })
+  useEffect(() => {
+    let token = localStorage.getItem("token");
 
-    useEffect(()=>{
-        let token = localStorage.getItem("token");
-        
-        API.getUserInfo(token).then((res)=>{
-            setUserInfo(res.data)
-        })
-    }, [])
+    API.getUserInfo(token).then((res) => {
+      let data = res.data;
+      setUserInfo({
+        ...userInfo,
+        username: data.username,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        id: data._id,
+        email: data.email,
+      });
+    });
+  }, []);
+  //remove at some point
+  useEffect(() => {
+    console.log(userInfo);
+  }, [userInfo]);
 
-    const handleLogout= () => {
-        //remove JWT from local storage
-    }
-    return(
-        <Container>
-        <Row>
-           <Col md="6" xs="12"></Col>
-           <Col md="6" xs="12"></Col> 
-        </Row>
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    history.push('/');
+  };
 
-        </Container>
-    )
-}
+  const { username, firstName, lastName, email, id } = userInfo;
+
+  return (
+    <div id="userhome">
+      <Row>
+        <Col md="6" xs="12" id="userleft">
+          <Jumbotron className="text-center" id="userwelcome">
+            Welcome {username}!
+          </Jumbotron>
+          <Card>
+            <CardTitle className="text-center">Your Info:</CardTitle>
+            <CardBody>
+              <span>User ID: {id}</span>
+              <br />
+              <span>First Name: {firstName}</span>
+              <br />
+              <span>Last Name: {lastName}</span>
+              <br />
+              <span>Email: {email}</span>
+              <br />
+            </CardBody>
+          </Card>
+        </Col>
+        <Col md="6" xs="12" id="userright">
+            <Card>
+                <CardTitle className="text-center">
+                    Options
+                </CardTitle>
+                <CardBody>
+                    <Button color="info" onClick={handleLogout}>
+Logout
+                    </Button><br/><br/>
+                    <Button color="primary" href="/newtranslation">
+                        New Translation
+                    </Button><br/><br/>
+                    <Button color="primary">
+                        Email Translation
+                    </Button><br/><br/>
+                    <Button color="primary">
+                        See Saved Translations
+                    </Button><br/><br/>
+                </CardBody>
+            </Card>
+        </Col>
+      </Row>
+    </div>
+  );
+};
 
 export default UserHome;

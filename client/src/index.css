@@ -10,13 +10,13 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: rgb(14, 3, 114);
-  /* background: linear-gradient(
-    0deg,
-    rgb(15, 15, 15) 0%,
-    rgba(10, 17, 122, 0.91) 33%,
-    rgb(14, 3, 114) 66%,
-    rgb(19, 6, 206) 100%
-  ); */
+}
+
+#userwelcome {
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,126,255,1) 100%);
+  color:white;
+  border-radius: 0%;
+  font-family: 'Russo One';
 }
 
 footer {
@@ -87,4 +87,18 @@ div.drop.dropdown-menu {
   color: white;
   background-color: black;
   font-family: 'Russo One';
+  /* margin: .25rem, .25rem, .25rem, .25rem; */
 }
+ #userhome {
+   background-color: white;
+   color: darkblue;
+ }
+ #userleft{
+   background-color:rgb(14, 3, 114);
+   font-weight: bold;
+   /* color: white; */
+ }
+ #userright {
+  background-color:rgb(14, 3, 114);
+   font-weight: bold;
+ }

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Input, Label, Button, Container, Col, Row } from "reactstrap";
+import { Form, Input, Label, Button, Col, Row } from "reactstrap";
 import API from "../../util/API";
 //import {withRouter, Redirect} from 'react-router-dom';
 
@@ -36,7 +36,7 @@ const Signup = () => {
     })
  };
   return (
-    <Container fluid={true}>
+    <>
       <Row>
         <Col md="3" xs="0"></Col>
         <Col md="6" xs="12">
@@ -90,7 +90,7 @@ const Signup = () => {
         </Col>
         <Col md="3" xs="0"></Col>
       </Row>
-    </Container>
+    </>
   );
 };
 

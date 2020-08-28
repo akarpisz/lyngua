@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {useHistory} from 'react-router-dom';
-import {Form, Input, Label, Button, Container, Row, Col} from 'reactstrap';
+import {Form, Input, Label, Button, Row, Col} from 'reactstrap';
 import API from '../../util/API';
 const Login = () => {
     const history = useHistory();
@@ -27,7 +27,7 @@ const Login = () => {
     }
 
     return (
-        <Container>
+        <>
         <Row>
             <Col md="3" xs="0"/>
             <Col md="6" xs="12">
@@ -60,7 +60,7 @@ const Login = () => {
             </Col>
             <Col md="3" xs="0"/>
         </Row>
-        </Container>
+        </>
     )
 };
 
