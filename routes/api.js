@@ -1,7 +1,11 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const db = require('../models');
-const { User } = require('../models');
+const db = require("../models");
+// const bcrypt = require('bcrypt');
+const { User } = require("../models");
+//const passportJWT = require('passport-jwt');
+const jwt = require("jsonwebtoken");
+const { token } = require("morgan");
 // //translation routes
 // //get a user's saved translations
 // router.get("/api/:user/translations", (req, res)=>{
@@ -15,20 +19,19 @@ const { User } = require('../models');
 // //delete a user translation
 // router.delete("/api/:user/translation/:id", (req, res)=>{
 //     let id = req.params.id;
-    
+
 // });
 // //update translation (basically only for favoriting)
 // router.put("/api/:user/translation/:id", (req, res)=>{
-    
+
 // })
 
 // //user routes
 // //get user data
-// router.get("/api/:username", 
-// //isAuthenticated, 
-// (req,res)=>{
-
-// });
+router.get("/api/:username",
+(req,res)=>{
+    console.log(req.headers)
+});
 
 // //delete user
 // router.delete("/api/:userid", (req,res)=>{
@@ -40,24 +43,58 @@ const { User } = require('../models');
 // })
 
 // //create new user
-router.post("/signup", (req,res)=>{
-    // console.log(req.body);
-    let newUser = new User(req.body);
-    console.log(newUser);
-    console.log(typeof newUser);
-    db.User.create(newUser, (err, result)=>{
-        if(err) {
-            return res.status(500).send('problem creating new user');
-        }
-        console.log(result);
-        return res.status(200).send('new user created');
-    })
+router.post("/signup", (req, res) => {
+  let newUser = new User(req.body);
+
+  db.User.create(newUser, (err, result) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).send("problem creating new user");
+    }
+    console.log(result);
+    return res.status(200).send("new user created");
+  });
 });
 
-// //user signin
-// router.get("/api/login", (req, res) => {
+//user signin
+router.post("/login", function (req, res) {
+  console.log(req.body);
+  const { username } = req.body;
+  const { password } = req.body;
 
-// });
+  db.User.findOne({ username: username }, async function (err, user) {
+    try {
+      if (err) {
+        throw err;
+      }
+      console.log(user);
+      let match = await user.comparePass(
+        //   user.password,
+        password);
+
+      console.log(` match : ${match}`);
+      if (match) {
+        jwt.sign(
+          { user },
+          process.env.SECRET,
+          { expiresIn: "2h" },
+          (err, token) => {
+            if (err) {
+                console.log('Error');
+              throw err;
+            }
+            console.log('token sent');
+            return res.send(token);
+          }
+        );
+      } else {
+        return res.status(401).end("login failed. check credentials");
+      }
+    } catch (err) {
+      return err;
+    }
+  });
+});
 
 // //message routes (*deep breaths*)
 // //user getting their messages
@@ -75,7 +112,5 @@ router.post("/signup", (req,res)=>{
 // router.delete("/api/messages/:to/:from", (req, res)=>{
 
 // })
-
-
 
 module.exports = router;

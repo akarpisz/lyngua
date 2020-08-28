@@ -4,6 +4,7 @@ import TopMenu from "../src/components/Navbar";
 import Login from './components/pages/Login';
 import Home from "./components/pages/Home/Home";
 import Signup from './components/pages/Signup';
+import UserHome from './components/pages/UserHome';
 //import './App.css';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 function App() {
@@ -18,10 +19,12 @@ function App() {
         </Route>
         <Route path="/login">
         <Login />
-        {/* if(authenticated) ...load userhome *checks auth, reroutes to login* */}
         </Route>
         <Route path="/signup">
           <Signup />
+        </Route>
+        <Route path="/userhome">
+          <UserHome/>
         </Route>
         </Switch>
       </Router>

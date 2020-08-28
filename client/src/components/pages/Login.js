@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import {useHistory} from 'react-router-dom';
 import {Form, Input, Label, Button, Container, Row, Col} from 'reactstrap';
-
-//import API from '../../util/API';
+import API from '../../util/API';
 const Login = () => {
+    const history = useHistory();
     const [loginState, setLoginState] = useState({
         username: "",
         password: ""
@@ -16,8 +17,13 @@ const Login = () => {
     }
 
     const handleSubmit = (e) => {
-        console.log(loginState);
-        //API.login(loginState).then go to userHome
+        e.preventDefault();
+        API.login(loginState).then(token=>{
+            localStorage.setItem("token", token.data);
+        }).then(()=>{
+            history.push("/userhome");
+        })
+        //.then go to userHome
     }
 
     return (
@@ -41,10 +47,11 @@ const Login = () => {
                 maxLength="25"
                 name="password"
                 onChange={handleInputChange}
+                autoComplete="true"
                 >
                 </Input>
                 <Button
-                color="success"
+                color="primary"
                 onClick={handleSubmit}
                 >
                     Login

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Form, Input, Label, Button, Container, Col, Row } from "reactstrap";
 import API from "../../util/API";
+//import {withRouter, Redirect} from 'react-router-dom';
+
 const Signup = () => {
   const [newUserState, setUserState] = useState({
     username: "",
@@ -22,16 +24,16 @@ const Signup = () => {
     e.preventDefault();
     console.log(newUserState);
     API.addUser(newUserState)
-    // .then(()=>{
-    // console.log("newuseradded");
-    //   setUserState({
-    //     username: "",
-    //     firstName: "",
-    //     lastName: "",
-    //     password: "",
-    //     email: "",
-    //   });
-    // })
+    .then(()=>{
+    console.log("newuseradded");
+      setUserState({
+        username: "",
+        firstName: "",
+        lastName: "",
+        password: "",
+        email: "",
+      });
+    })
  };
   return (
     <Container fluid={true}>
@@ -81,7 +83,7 @@ const Signup = () => {
               autoComplete="true"
             />
 
-            <Button color="success" onClick={handleSubmit}>
+            <Button color="primary" onClick={handleSubmit}>
               Submit
             </Button>
           </Form>

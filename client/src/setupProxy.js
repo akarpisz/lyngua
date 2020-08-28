@@ -18,12 +18,6 @@ module.exports = function (app) {
       target: "http://localhost:5001",
       changeOrigin: true,
       secure: false,
-    //   pathRewrite: {
-    //     "^/api": "",
-    //   },
-    //   onProxyReq: function (proxyReq, req, res) {
-    //     proxyReq.setHeader("localhost:3000", "localhost:5001");
-    //   },
     })
   );
 };
