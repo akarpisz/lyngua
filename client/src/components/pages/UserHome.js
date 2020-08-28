@@ -12,13 +12,11 @@ const UserHome = () => {
     })
 
     useEffect(()=>{
-        let token = localStorage.getItem("token")
-        API.getUserInfo(token)
-        //.then((res)=>{
-        //     setUserInfo(res);
-        // })
-
-        // //setState and pass to components
+        let token = localStorage.getItem("token");
+        
+        API.getUserInfo(token).then((res)=>{
+            setUserInfo(res.data)
+        })
     }, [])
 
     const handleLogout= () => {

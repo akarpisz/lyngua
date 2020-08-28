@@ -5,7 +5,23 @@ const db = require("../models");
 const { User } = require("../models");
 //const passportJWT = require('passport-jwt');
 const jwt = require("jsonwebtoken");
-const { token } = require("morgan");
+
+const validateToken = (req, res, next) => {
+  const authHeader = req.headers["authorization"];
+
+  const token = authHeader && authHeader.split(" ")[1];
+
+  if (token == null) return res.sendStatus(401);
+
+  jwt.verify(token, process.env.SECRET, (err, user) => {
+    if (err) {
+      return res.sendStatus(403);
+    }
+    req.user = user;
+    next();
+  });
+};
+
 // //translation routes
 // //get a user's saved translations
 // router.get("/api/:user/translations", (req, res)=>{
@@ -28,9 +44,18 @@ const { token } = require("morgan");
 
 // //user routes
 // //get user data
-router.get("/api/:username",
-(req,res)=>{
-    console.log(req.headers)
+router.get("/getuser", validateToken, (req, res) => {
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1];
+  const decoded = jwt.decode(token);
+  const user = decoded.user.username;
+
+  db.User.findOne({ username: user }, (err, data) => {
+    if (err) {
+      return res.status(500).end("problem finding user in database");
+    } 
+    return res.send(data);
+  });
 });
 
 // //delete user
@@ -70,7 +95,8 @@ router.post("/login", function (req, res) {
       console.log(user);
       let match = await user.comparePass(
         //   user.password,
-        password);
+        password
+      );
 
       console.log(` match : ${match}`);
       if (match) {
@@ -80,10 +106,10 @@ router.post("/login", function (req, res) {
           { expiresIn: "2h" },
           (err, token) => {
             if (err) {
-                console.log('Error');
+              console.log("Error");
               throw err;
             }
-            console.log('token sent');
+            console.log("token sent");
             return res.send(token);
           }
         );
