@@ -16,4 +16,7 @@ export default {
   getLanguages: function () {
     return axios.get("/api/supportedlangs");
   },
+  translate: function (params) {
+    
+  }
 };
