@@ -1,10 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../models");
+const axios = require("axios");
 // const bcrypt = require('bcrypt');
 const { User } = require("../models");
 //const passportJWT = require('passport-jwt');
 const jwt = require("jsonwebtoken");
+const {v4: uuidv4} = require("uuid");
 
 const validateToken = (req, res, next) => {
   const authHeader = req.headers["authorization"];
@@ -23,15 +25,29 @@ const validateToken = (req, res, next) => {
 };
 
 // //translation routes
+
 // //get a user's saved translations
-// router.get("/api/:user/translations", (req, res)=>{
+// router.get("/api/translations", (req, res)=>{
 
 // });
 
-// //add user translation
-// router.post("/api/:user/translations", (req, res)=>{
+//add user translation
+router.post("/api/translations", validateToken, (req, res) => {});
 
-// });
+router.get("/supportedlangs", async (req, res) => {
+  console.log("received req");
+  let clientTraceId = uuidv4().toString(); 
+  console.log(clientTraceId);
+  let result= await axios(process.env.TRANSLATOR_TEXT_ENDPOINT, {
+    method: "GET",
+    headers: {
+      "Ocp-Apim-Subscription-Key": process.env.TRANSLATOR_TEXT_SUBSCRIPTION_KEY,
+      "Content-type": "application/json",
+      "X-ClientTraceId": clientTraceId,
+    },
+  })
+  return res.json(result.data.translation);
+});
 // //delete a user translation
 // router.delete("/api/:user/translation/:id", (req, res)=>{
 //     let id = req.params.id;
@@ -53,7 +69,7 @@ router.get("/getuser", validateToken, (req, res) => {
   db.User.findOne({ username: user }, (err, data) => {
     if (err) {
       return res.status(500).end("problem finding user in database");
-    } 
+    }
     return res.send(data);
   });
 });
