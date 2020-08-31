@@ -1,23 +1,19 @@
 import React, { useEffect, useState } from "react";
 import API from "../../util/API";
 import TransForm from "../TransForm";
-import {
-  
-  Col,
-  Row,
-
-} from "reactstrap";
+import Results from "../Results";
+import { Col, Row } from "reactstrap";
 
 const NewTrans = () => {
-  
   const [transState, setTransState] = useState({
     supported: {},
     fromTxt: "",
     toTxt: "",
-    fromLang: "",
+    fromLang: "en",
     toLang: null,
     timeStamp: null,
     starred: false,
+    received: false,
   });
   useEffect(() => {
     async function getLang() {
@@ -28,11 +24,10 @@ const NewTrans = () => {
         ...transState,
         supported: langs.data,
       });
-      
     }
     getLang();
   }, []);
-  
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     console.log(name + " " + value);
@@ -42,24 +37,33 @@ const NewTrans = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    API.translate(transState)
+    let token = localStorage.getItem("token");
+    
+    console.log(transState);
+    let result = await API.translate(transState, token);
+    console.log(result);
+    // setTransState({
+    //   ...transState, toText: result, received: true, timestamp: Date.now()
+    // })
   };
-  
+
   return (
     <div id="trans-div">
       <Row>
         <Col md={2} xs={0} />
         <Col md={8} xs={12}>
           <TransForm
-          supportedLang={transState.supported}
-          handleSubmit={handleSubmit}
-          handleInputChange={handleInputChange}
+            supportedLang={transState.supported}
+            handleSubmit={handleSubmit}
+            handleInputChange={handleInputChange}
           />
         </Col>
         <Col md={2} xs={0} />
       </Row>
+
+      {transState.received ? <Results transState={transState} /> : <div />}
     </div>
   );
 };

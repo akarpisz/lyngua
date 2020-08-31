@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const db = require("../models");
 const axios = require("axios");
+
 // const bcrypt = require('bcrypt');
 const { User } = require("../models");
 //const passportJWT = require('passport-jwt');
@@ -12,8 +13,8 @@ const validateToken = (req, res, next) => {
   const authHeader = req.headers["authorization"];
 
   const token = authHeader && authHeader.split(" ")[1];
-
-  if (token == null) return res.sendStatus(401);
+  console.log(token);
+  if (token == null) return res.status(401).send('token error');
 
   jwt.verify(token, process.env.SECRET, (err, user) => {
     if (err) {
@@ -24,6 +25,15 @@ const validateToken = (req, res, next) => {
   });
 };
 
+const checkToken = (req, res, next) => {
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1];
+  if (token===null) {
+    return res.status(401).send('i dont like your face');
+  }
+  next();
+}
+
 // //translation routes
 
 // //get a user's saved translations
@@ -32,7 +42,41 @@ const validateToken = (req, res, next) => {
 // });
 
 //add user translation
-router.post("/api/translations", validateToken, (req, res) => {});
+router.post("/newtrans", checkToken, async (req, res) => {
+  try{
+    const {toLang, fromTxt, fromLang} = req.body.data;
+    
+    
+    // const trans = await axios.post(`https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to=${toLang}`, text,
+    //   { headers: {
+    //     "Ocp-Apim-Subscription-Key": process.env.TRANSLATOR_TEXT_SUBSCRIPTION_KEY,
+    //     "Content-Type": "application/json",
+    //   }}
+      
+    // )
+    // console.log(trans);
+
+    var text = JSON.stringify([{"Text":`${fromTxt}`}]);
+
+    var config = {
+      method: 'post',
+      url: 'https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to=es',
+      headers: { 
+        'Ocp-Apim-Subscription-Key': '0ce81eb8a72e4953a4c1bbf9f0c2cedd', 
+        'Content-Type': 'application/json'
+      },
+      data : text
+    };
+    
+    let {data} = await axios(config)
+    
+    return res.json(data);
+    //data needs JSON.stringify()
+  } catch(err){
+    console.log(err);
+    return err;
+  }
+});
 
 router.get("/supportedlangs", async (req, res) => {
   console.log("received req");
@@ -110,7 +154,6 @@ router.post("/login", function (req, res) {
       }
       console.log(user);
       let match = await user.comparePass(
-        //   user.password,
         password
       );
 
@@ -122,7 +165,6 @@ router.post("/login", function (req, res) {
           { expiresIn: "2h" },
           (err, token) => {
             if (err) {
-              console.log("Error");
               throw err;
             }
             console.log("token sent");

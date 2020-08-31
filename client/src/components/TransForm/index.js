@@ -22,7 +22,7 @@ const TransForm = ({ transText, handleInputChange, handleSubmit, supportedLang }
       <Card>
             <CardHeader></CardHeader>
             <CardBody>
-              <Form>
+              <Form onSubmit={handleSubmit}>
                 <FormGroup>
                   <Label for="from">Text to Translate: </Label>
                   <Input
@@ -51,7 +51,7 @@ const TransForm = ({ transText, handleInputChange, handleSubmit, supportedLang }
                   </Dropdown>
                 </FormGroup>
                 <FormGroup>
-                  <Button onSubmit={handleSubmit} color="primary">Submit</Button>
+                  <Button color="primary">Submit</Button>
                 </FormGroup>
               </Form>
             </CardBody>

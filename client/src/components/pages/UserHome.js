@@ -1,10 +1,18 @@
 import React, { useState, useEffect } from "react";
 import API from "../../util/API";
-import {useHistory} from 'react-router-dom';
-import { Jumbotron, Row, Col, CardTitle, Card, CardBody, Button } from "reactstrap";
+import { useHistory } from "react-router-dom";
+import {
+  Jumbotron,
+  Row,
+  Col,
+  CardTitle,
+  Card,
+  CardBody,
+  Button,
+} from "reactstrap";
 
 const UserHome = () => {
-    const history = useHistory();
+  const history = useHistory();
   const [userInfo, setUserInfo] = useState({
     id: "",
     username: "",
@@ -35,7 +43,7 @@ const UserHome = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    history.push('/');
+    history.push("/");
   };
 
   const { username, firstName, lastName, email, id } = userInfo;
@@ -62,25 +70,27 @@ const UserHome = () => {
           </Card>
         </Col>
         <Col md="6" xs="12" id="userright">
-            <Card>
-                <CardTitle className="text-center">
-                    Options
-                </CardTitle>
-                <CardBody>
-                    <Button color="info" onClick={handleLogout}>
-Logout
-                    </Button><br/><br/>
-                    <Button color="primary" href="/newtranslation">
-                        New Translation
-                    </Button><br/><br/>
-                    <Button color="primary">
-                        Email Translation
-                    </Button><br/><br/>
-                    <Button color="primary">
-                        See Saved Translations
-                    </Button><br/><br/>
-                </CardBody>
-            </Card>
+          <Card>
+            <CardTitle className="text-center">Options</CardTitle>
+            <CardBody>
+              <Button color="info" onClick={handleLogout}>
+                Logout
+              </Button>
+              <br />
+              <br />
+              <Button color="primary" href="/newtranslation">
+                New Translation
+              </Button>
+              <br />
+              <br />
+              <Button color="primary">Email Translation</Button>
+              <br />
+              <br />
+              <Button color="primary">See Saved Translations</Button>
+              <br />
+              <br />
+            </CardBody>
+          </Card>
         </Col>
       </Row>
     </div>

@@ -61,31 +61,8 @@ UserSchema.methods.comparePass = function (submitPass) {
     return isMatch;
   }
   );
-  //     try{
-  //         console.log(typeof submitPass);
-  //         console.log(typeof this.password);
-  //         console.log(`${submitPass}`);
-  //         console.log(`${this.password}`);
-  //     let match = await bcrypt.compareSync(submitPass, this.password)
-  //     console.log(match);
-  //     return match;
-  // } catch(err){
-  //     return err;
-  // }
+  
 };
-
-// UserSchema.methods.comparePass = function(submitPass, cb){
-//     let match = bcrypt.compareSync(submitPass, this.password)
-//         console.log(submitPass);
-//         console.log(this.password);
-//     if(match){
-//         cb(null, isMatch);
-//     }
-//     else {
-//         cb(err)
-//     }
-
-// }
 
 const User = mongoose.model("User", UserSchema);
 module.exports = User;

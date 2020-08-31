@@ -1,4 +1,5 @@
 import axios from "axios";
+
 export default {
   addUser: function (newUser) {
     return axios.post("/api/signup", newUser);
@@ -16,7 +17,12 @@ export default {
   getLanguages: function () {
     return axios.get("/api/supportedlangs");
   },
-  translate: function (params) {
-    
+  translate: function (trans, token) {
+    return axios.post('/api/newtrans', {
+      data: trans,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
   }
 };

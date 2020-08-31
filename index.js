@@ -21,7 +21,14 @@ mongoose.set('useFindAndModify', false);
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/lyngua")
 
 // app.use(passport.initialize());
-app.use(cors());
+// app.use(cors());
+
+app.use(cors({
+    origin: process.env.ALLOW_ORIGIN,
+    credentials: true,
+    allowedHeaders: 'X-Requested-With, Content-Type, Authorization',
+    methods: 'GET, POST, PATCH, PUT, POST, DELETE, OPTIONS'
+  }))
 
 //change to client/build for production
 app.use(express.static(path.join(__dirname, "client/public")));
