@@ -11,7 +11,7 @@ const NewTrans = () => {
     toTxt: "",
     fromLang: "en",
     toLang: null,
-    timeStamp: null,
+    
     starred: false,
     received: false,
   });
@@ -43,10 +43,11 @@ const NewTrans = () => {
     
     console.log(transState);
     let result = await API.translate(transState, token);
-    console.log(result);
-    // setTransState({
-    //   ...transState, toText: result, received: true, timestamp: Date.now()
-    // })
+    console.log(result.data[0].translations[0].text);
+    setTransState({
+      ...transState, toTxt: result.data[0].translations[0].text, received: true
+    })
+    
   };
 
   return (

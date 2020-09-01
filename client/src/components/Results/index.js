@@ -1,7 +1,8 @@
 import React from 'react';
-import { Card, CardBody, CardHeader, Col, Row  } from 'reactstrap';
+import { Card, CardText, CardBody, CardHeader, Col, Row  } from 'reactstrap';
 
-const Results = ({ fromText, toText}) => {
+const Results = ({ transState: { fromTxt, toTxt} }) => {
+
     return (
         <>
         <Row>
@@ -9,10 +10,10 @@ const Results = ({ fromText, toText}) => {
             <Col md={8} xs={12}>
             <Card>
                 <CardHeader>
-                    Translated Text:
+                    Translated Text: {fromTxt}
                 </CardHeader>
                 <CardBody>
-                    {toText}
+                    Result: {toTxt}
                 </CardBody>
             </Card>
             </Col>

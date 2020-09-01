@@ -29,7 +29,7 @@ const checkToken = (req, res, next) => {
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];
   if (token===null) {
-    return res.status(401).send('i dont like your face');
+    return res.status(401).send('Token Error');
   }
   next();
 }
@@ -60,16 +60,19 @@ router.post("/newtrans", checkToken, async (req, res) => {
 
     var config = {
       method: 'post',
-      url: 'https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to=es',
+      url: `https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to=${toLang}`,
       headers: { 
-        'Ocp-Apim-Subscription-Key': '0ce81eb8a72e4953a4c1bbf9f0c2cedd', 
+        'Ocp-Apim-Subscription-Key': process.env.TRANSLATOR_TEXT_SUBSCRIPTION_KEY, 
         'Content-Type': 'application/json'
       },
       data : text
     };
     
     let {data} = await axios(config)
-    
+    console.log(data);
+    console.log(JSON.stringify(data.translations[0]))
+
+    //db.Translation.create();
     return res.json(data);
     //data needs JSON.stringify()
   } catch(err){
