@@ -36,12 +36,20 @@ export default {
       },
     });
   },
-  updateTrans: function (token, transID) {
-    // return axios.get("/api/startrans", {
-    //   headers: {
-    //     Authorization: `Bearer ${token}`,
-    //   }
-    //})
+  updateTrans: function (token, transID, newFavState) {
+    const config = {
+      method: "PUT",
+      url: "/api/startrans",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        // "Content-Type": "application/json"
+      },
+      data: {
+        id: transID,
+        newState: newFavState
+      },
+    }
+    return axios(config);
   },
   deleteTrans: function (token, transID) {
     const config = {

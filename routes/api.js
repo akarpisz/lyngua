@@ -138,10 +138,21 @@ router.delete("/deltrans", checkToken, (req, res) => {
   
 });
 
-// //update translation (basically only for favoriting)
-// router.put("/api/:user/translation/:id", (req, res)=>{
+//update translation (basically only for favoriting)
+router.put("/startrans",  checkToken, (req, res)=>{
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1];
+  const decoded = jwt.verify(token, process.env.SECRET);
 
-// })
+  db.Translation.findOneAndUpdate({ _id:req.body.id, username: decoded.user.username, user_id: decoded.user._id}, {$set: {starred: req.body.newState}}, (err)=>{
+    if (err){
+      console.log(err);
+      return res.status(500).send("DB error");
+    }
+
+    return res.status(200).send("DB updated");
+  })
+})
 
 // //user routes
 // //get user data

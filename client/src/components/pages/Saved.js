@@ -21,9 +21,15 @@ const Saved = () => {
       });
     });
   }, []);
-  const changeFav = (id) => {
-    console.log(id);
-    // API.updateTrans(token, /*trans id */)
+  const changeFav = (id, favState) => {
+    let token = localStorage.getItem("token");
+    let newState = !favState;
+
+    API.updateTrans(token, id, newState).then(res=>{
+        if (res.status) {
+            refreshPage();
+        }
+    })
   };
 
   const delTrans = (id)=>{
@@ -52,7 +58,7 @@ const Saved = () => {
             return (
               <div key={trans._id}>
                 <Card>
-                  <span onClick={()=>{changeFav(trans._id)}}>{trans.starred ? <BsStarFill /> : <BsStar />}</span>
+                  <span onClick={()=>{changeFav(trans._id, trans.starred)}}>{trans.starred ? <BsStarFill /> : <BsStar />}</span>
                   <CardHeader>From : {trans.fromLang}</CardHeader>
                   <CardBody>Text : {trans.fromTxt}</CardBody>
                   <CardHeader>To : {trans.toLang}</CardHeader>
