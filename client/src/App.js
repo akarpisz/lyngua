@@ -5,6 +5,7 @@ import Home from "./components/pages/Home/Home";
 import Signup from './components/pages/Signup';
 import UserHome from './components/pages/UserHome';
 import NewTrans from './components/pages/NewTrans';
+import Saved from './components/pages/Saved';
 import {Container} from 'reactstrap';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -37,6 +38,9 @@ function App() {
         </Route>
         <Route path="/newtranslation">
           <NewTrans/>
+        </Route>
+        <Route path="/saved">
+        <Saved/>
         </Route>
         </Switch>
       </Router>

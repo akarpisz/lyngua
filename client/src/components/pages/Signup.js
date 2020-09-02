@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Form, Input, Label, Button, Col, Row } from "reactstrap";
 import API from "../../util/API";
-//import {withRouter, Redirect} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 
 const Signup = () => {
+  const history = useHistory();
   const [newUserState, setUserState] = useState({
     username: "",
     firstName: "",
@@ -33,6 +34,8 @@ const Signup = () => {
         password: "",
         email: "",
       });
+    }).then(()=> {
+      history.push("/login");
     })
  };
   return (

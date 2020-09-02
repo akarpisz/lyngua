@@ -9,7 +9,7 @@ const NewTrans = () => {
     supported: {},
     fromTxt: "",
     toTxt: "",
-    fromLang: "en",
+    fromLang: "",
     toLang: null,
     
     starred: false,
@@ -40,12 +40,10 @@ const NewTrans = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     let token = localStorage.getItem("token");
-    
-    console.log(transState);
     let result = await API.translate(transState, token);
     console.log(result.data[0].translations[0].text);
     setTransState({
-      ...transState, toTxt: result.data[0].translations[0].text, received: true
+      ...transState, toTxt: result.data[0].translations[0].text, toLang:  result.data[0].translations[0].to, received: true
     })
     
   };

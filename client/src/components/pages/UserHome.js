@@ -86,7 +86,7 @@ const UserHome = () => {
               <Button color="primary">Email Translation</Button>
               <br />
               <br />
-              <Button color="primary">See Saved Translations</Button>
+              <Button color="primary" href="/saved">See Saved Translations</Button>
               <br />
               <br />
             </CardBody>

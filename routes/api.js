@@ -2,19 +2,14 @@ const express = require("express");
 const router = express.Router();
 const db = require("../models");
 const axios = require("axios");
-
-// const bcrypt = require('bcrypt');
-const { User } = require("../models");
-//const passportJWT = require('passport-jwt');
+const { User, Translation } = require("../models");
 const jwt = require("jsonwebtoken");
-const {v4: uuidv4} = require("uuid");
+const { v4: uuidv4 } = require("uuid");
 
 const validateToken = (req, res, next) => {
   const authHeader = req.headers["authorization"];
-
   const token = authHeader && authHeader.split(" ")[1];
-  console.log(token);
-  if (token == null) return res.status(401).send('token error');
+  if (token == null) return res.status(401).send("token error");
 
   jwt.verify(token, process.env.SECRET, (err, user) => {
     if (err) {
@@ -27,55 +22,86 @@ const validateToken = (req, res, next) => {
 
 const checkToken = (req, res, next) => {
   const authHeader = req.headers["authorization"];
+
   const token = authHeader && authHeader.split(" ")[1];
-  if (token===null) {
-    return res.status(401).send('Token Error');
+
+  if (token === null) {
+    return res.status(401).send("Token Error");
   }
   next();
-}
+};
 
 // //translation routes
 
 // //get a user's saved translations
-// router.get("/api/translations", (req, res)=>{
+router.get("/savedtrans", checkToken, (req, res) => {
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1];
+  let decoded = jwt.decode(token);
+  console.log(decoded);
 
-// });
+  db.Translation.find(
+    { username: decoded.user.username, user_id: decoded.user["_id"] },
+    (err, data) => {
+      if (err) {
+        console.log(err);
+        return res.status(500).send("DB error");
+      }
+      console.log(data);
+      return res.json(data);
+    }
+  );
+});
 
 //add user translation
 router.post("/newtrans", checkToken, async (req, res) => {
-  try{
-    const {toLang, fromTxt, fromLang} = req.body.data;
-    
-    
-    // const trans = await axios.post(`https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to=${toLang}`, text,
-    //   { headers: {
-    //     "Ocp-Apim-Subscription-Key": process.env.TRANSLATOR_TEXT_SUBSCRIPTION_KEY,
-    //     "Content-Type": "application/json",
-    //   }}
-      
-    // )
-    // console.log(trans);
+  try {
+    const authHeader = req.headers["authorization"];
+    const token = authHeader && authHeader.split(" ")[1];
+    let decoded = jwt.decode(token);
 
-    var text = JSON.stringify([{"Text":`${fromTxt}`}]);
+    const { toLang, fromTxt } = req.body.data;
+
+    var text = JSON.stringify([{ Text: `${fromTxt}` }]);
 
     var config = {
-      method: 'post',
+      method: "post",
       url: `https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to=${toLang}`,
-      headers: { 
-        'Ocp-Apim-Subscription-Key': process.env.TRANSLATOR_TEXT_SUBSCRIPTION_KEY, 
-        'Content-Type': 'application/json'
+      headers: {
+        "Ocp-Apim-Subscription-Key":
+          process.env.TRANSLATOR_TEXT_SUBSCRIPTION_KEY,
+        "Content-Type": "application/json",
       },
-      data : text
+      data: text,
     };
-    
-    let {data} = await axios(config)
+
+    let { data } = await axios(config);
     console.log(data);
-    console.log(JSON.stringify(data.translations[0]))
+
+    let newTrans = new Translation({
+      user_id: decoded.user["_id"],
+      username: decoded.user.username,
+      fromLang: data[0].detectedLanguage.language,
+      toLang: data[0].translations[0].to,
+      fromTxt: fromTxt,
+      toTxt: data[0].translations[0].text,
+      timestamp: Date.now(),
+      starred: false,
+    });
+
+    db.Translation.create(newTrans, (err, result) => {
+      if (err) {
+        throw err;
+      }
+      return result;
+    });
+    console.log(JSON.stringify(data[0].translations[0].text));
+    console.log(JSON.stringify(data[0].translations[0].to));
 
     //db.Translation.create();
     return res.json(data);
     //data needs JSON.stringify()
-  } catch(err){
+  } catch (err) {
     console.log(err);
     return err;
   }
@@ -83,23 +109,35 @@ router.post("/newtrans", checkToken, async (req, res) => {
 
 router.get("/supportedlangs", async (req, res) => {
   console.log("received req");
-  let clientTraceId = uuidv4().toString(); 
+  let clientTraceId = uuidv4().toString();
   console.log(clientTraceId);
-  let result= await axios(process.env.TRANSLATOR_TEXT_ENDPOINT, {
+  let result = await axios(process.env.TRANSLATOR_TEXT_ENDPOINT, {
     method: "GET",
     headers: {
       "Ocp-Apim-Subscription-Key": process.env.TRANSLATOR_TEXT_SUBSCRIPTION_KEY,
       "Content-type": "application/json",
       "X-ClientTraceId": clientTraceId,
     },
-  })
+  });
   return res.json(result.data.translation);
 });
 // //delete a user translation
-// router.delete("/api/:user/translation/:id", (req, res)=>{
-//     let id = req.params.id;
+router.delete("/deltrans", checkToken, (req, res) => {
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1];
+  const decoded = jwt.verify(token, process.env.SECRET);
+  const trans_id = req.body.id
+  console.log(decoded);
+  db.Translation.deleteOne({_id: trans_id, username: decoded.user.username, user_id: decoded.user["_id"]}, (err)=> {
+    if (err){
+      return res.status(500).send("DB delete error")
+    }
+    console.log("deleted record");
+  })
+  return res.status(200).send("delete successful");
+  
+});
 
-// });
 // //update translation (basically only for favoriting)
 // router.put("/api/:user/translation/:id", (req, res)=>{
 
@@ -156,9 +194,7 @@ router.post("/login", function (req, res) {
         throw err;
       }
       console.log(user);
-      let match = await user.comparePass(
-        password
-      );
+      let match = await user.comparePass(password);
 
       console.log(` match : ${match}`);
       if (match) {

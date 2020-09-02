@@ -23,10 +23,8 @@ const UserSchema = new Schema({
     required: true,
     unique: true,
     trim: true,
-    validate: function (e) {
-      //regex email check
-      return e;
-    },
+    match: [/.+@.+\..+/, "Please enter a valid email address"]
+    
   },
   password: {
     type: String,

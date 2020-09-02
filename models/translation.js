@@ -2,14 +2,20 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const TranslationSchema = new Schema({
+    user_id: {
+        type: String,
+        required: true
+    },
+    username: {
+        type: String,
+    },
     fromLang: {
         type: String,
-        maxlength: 2,
+        
         minlength: 2,
     },
     toLang: {
         type: String,
-        maxlength: 2,
         minlength: 2,
     },
     fromTxt: {
