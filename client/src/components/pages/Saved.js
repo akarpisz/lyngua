@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import API from "../../util/API";
 import { BsStar, BsStarFill, BsTrash } from "react-icons/bs";
 import { Col, Row, Card, CardBody, CardHeader, Jumbotron, Button } from "reactstrap";
-import { token } from "morgan";
+
 //use 'react-icons library for fav-stars!
 
 const Saved = () => {
@@ -64,8 +64,66 @@ const Saved = () => {
       </Row>
       <Row>
         <Col>
-        
-          {saved.translations.map((trans) => {
+        {saved.starFiltered ? (<div>
+  {saved.translations
+    .filter(trans => trans.starred)
+    .map(trans => {
+      return(
+      <div key={trans._id}>
+        <Card>
+          <span
+            onClick={() => {
+              changeFav(trans._id, trans.starred);
+            }}
+          >
+            {trans.starred ? <BsStarFill /> : <BsStar />}
+          </span>
+          <CardHeader>From : {trans.fromLang}</CardHeader>
+          <CardBody>Text : {trans.fromTxt}</CardBody>
+          <CardHeader>To : {trans.toLang}</CardHeader>
+          <CardBody>{trans.toTxt}</CardBody>
+          <span
+            onClick={() => {
+              delTrans(trans._id);
+            }}
+          >
+            <BsTrash />
+          </span>
+        </Card>
+        <br />
+      </div>
+      )
+    })}
+</div>): (<div>
+        {saved.translations.map((trans) => {
+          return(
+          <div key={trans._id}>
+            <Card>
+              <span
+                onClick={() => {
+                  changeFav(trans._id, trans.starred);
+                }}
+              >
+                {trans.starred ? <BsStarFill /> : <BsStar />}
+              </span>
+              <CardHeader>From : {trans.fromLang}</CardHeader>
+              <CardBody>Text : {trans.fromTxt}</CardBody>
+              <CardHeader>To : {trans.toLang}</CardHeader>
+              <CardBody>{trans.toTxt}</CardBody>
+              <span
+                onClick={() => {
+                  delTrans(trans._id);
+                }}
+              >
+                <BsTrash />
+              </span>
+            </Card>
+            <br />
+          </div>
+          )
+        })}
+      </div>)}
+          {/* {saved.translations.map((trans) => {
             return (
               <div key={trans._id}>
                 <Card>
@@ -79,7 +137,7 @@ const Saved = () => {
                 <br />
               </div>
             );
-          })}
+          })} */}
         </Col>
       </Row>
     </>
