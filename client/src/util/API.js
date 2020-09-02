@@ -65,4 +65,7 @@ export default {
     };
     return axios(config);
   },
+  emailTrans: function () {
+    return axios();
+  }
 };

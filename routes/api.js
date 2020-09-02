@@ -5,6 +5,7 @@ const axios = require("axios");
 const { User, Translation } = require("../models");
 const jwt = require("jsonwebtoken");
 const { v4: uuidv4 } = require("uuid");
+const nodemailer = require("nodemailer");
 
 const validateToken = (req, res, next) => {
   const authHeader = req.headers["authorization"];

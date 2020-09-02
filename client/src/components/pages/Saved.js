@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import API from "../../util/API";
 import { BsStar, BsStarFill, BsTrash } from "react-icons/bs";
-import { Col, Row, Card, CardBody, CardHeader, Jumbotron } from "reactstrap";
+import { Col, Row, Card, CardBody, CardHeader, Jumbotron, Button } from "reactstrap";
 import { token } from "morgan";
 //use 'react-icons library for fav-stars!
 
 const Saved = () => {
-  const [saved, setSaved] = useState({ translations: [], received: false });
+  const [saved, setSaved] = useState({ translations: [], received: false, starFiltered: false });
     const refreshPage = () => {
         window.location.reload(false);
     }
@@ -31,7 +31,12 @@ const Saved = () => {
         }
     })
   };
-
+  const handleFavSort = () => {
+      let toggleSort = !saved.starFiltered
+      setSaved({
+          ...saved, starFiltered: toggleSort
+      })
+  }
   const delTrans = (id)=>{
     console.log(id);
     let token = localStorage.getItem("token");
@@ -49,11 +54,17 @@ const Saved = () => {
     <>
       <Row>
         <Col>
-          <Jumbotron>Saved Translations</Jumbotron>
+          <Jumbotron><span>Saved Translations</span></Jumbotron>
         </Col>
       </Row>
       <Row>
+          <Col>
+          <Button onClick={handleFavSort}>View Favorites Only</Button>
+          </Col>
+      </Row>
+      <Row>
         <Col>
+        
           {saved.translations.map((trans) => {
             return (
               <div key={trans._id}>

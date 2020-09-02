@@ -1,5 +1,5 @@
 import React from 'react';
-import smtp from 'smtp';
+import {} from 'reactstrap';
 
 const EmailTrans = () => {
 
