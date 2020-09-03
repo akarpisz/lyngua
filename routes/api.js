@@ -6,6 +6,12 @@ const { User, Translation } = require("../models");
 const jwt = require("jsonwebtoken");
 const { v4: uuidv4 } = require("uuid");
 const nodemailer = require("nodemailer");
+//const transporter = nodemailer.createTransport(/*transport, defaults*/);
+
+
+const mailTrans = () => {
+
+}
 
 const validateToken = (req, res, next) => {
   const authHeader = req.headers["authorization"];
@@ -107,6 +113,16 @@ router.post("/newtrans", checkToken, async (req, res) => {
     return err;
   }
 });
+
+//email a chosen translation
+router.post("/email", checkToken, (req, res)=>{
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1];
+  const decoded = jwt.verify(token, process.env.SECRET);
+  console.log(req.body.id);
+
+  // return res.send(req.body);
+})
 
 router.get("/supportedlangs", async (req, res) => {
   console.log("received req");

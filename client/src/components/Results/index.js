@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardText, CardBody, CardHeader, Col, Row  } from 'reactstrap';
+import { Card, CardBody, CardHeader, Col, Row  } from 'reactstrap';
 
 const Results = ({ transState: { fromTxt, toTxt} }) => {
 

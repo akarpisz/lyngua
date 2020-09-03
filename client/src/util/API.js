@@ -42,7 +42,6 @@ export default {
       url: "/api/startrans",
       headers: {
         Authorization: `Bearer ${token}`,
-        // "Content-Type": "application/json"
       },
       data: {
         id: transID,
@@ -65,7 +64,20 @@ export default {
     };
     return axios(config);
   },
-  emailTrans: function () {
-    return axios();
+  emailTrans: function (id, token) {
+    
+    const config = {
+      method: "POST",
+      url: "/api/email",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+      },
+      data: {
+        id: id
+      },
+    };
+  
+    return axios(config);
   }
 };
