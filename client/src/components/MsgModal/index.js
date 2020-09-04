@@ -8,16 +8,17 @@ import {
   Label,
   Input,
 } from "reactstrap";
+import {BiMessageAdd} from 'react-icons/bi';
 
-const EmailModal = (props) => {
-  const { modalSubmit, toggle, modal, emailState } = props;
+const MsgModal = (props) => {
+  const { handleInputChange,modalSubmit, toggle, modal, msgState } = props;
   return (
     <div>
       <Modal isOpen={modal} toggle={toggle}>
-        <ModalHeader toggle={toggle}>Email This Translation?</ModalHeader>
+        <ModalHeader toggle={toggle}>Send This Translation?</ModalHeader>
         <ModalBody>
-          <Label for="email recipient">Recipient: </Label>
-          <Input type="text" name="emailrecip" />
+          <Label for="message recipient">Recipient: </Label>
+          <Input type="text" onChange={handleInputChange}name="msgRecip" value={msgState.msgRecip} />
         </ModalBody>
         <ModalFooter>
           <Button
@@ -25,10 +26,10 @@ const EmailModal = (props) => {
             type="submit"
             onClick={() => {
               toggle();
-              modalSubmit(emailState.transId);
+              modalSubmit(msgState.transId);
             }}
           >
-            Email Translation
+            <BiMessageAdd/>
           </Button>{" "}
           <Button color="secondary" onClick={toggle}>
             Cancel
@@ -39,4 +40,4 @@ const EmailModal = (props) => {
   );
 };
 
-export default EmailModal;
+export default MsgModal;

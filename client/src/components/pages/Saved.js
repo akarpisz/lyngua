@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import API from "../../util/API";
 import { BsStar, BsStarFill, BsTrash } from "react-icons/bs";
-import { SiMinutemailer } from "react-icons/si";
+import { BiMessageAdd } from "react-icons/bi";
 import {
   Col,
   Row,
@@ -11,7 +11,7 @@ import {
   Jumbotron,
   Button,
 } from "reactstrap";
-import EmailModal from "../EmailModal";
+import MsgModal from "../MsgModal";
 
 //use 'react-icons library for fav-stars!
 
@@ -26,9 +26,9 @@ const Saved = () => {
   };
 
   const [modal, setModal] = useState(false);
-  const [emailState, setEmailState] = useState({
+  const [msgState, setMsgState] = useState({
     transId: "",
-    emailRecip: "",
+    msgRecip: "",
   });
 
   const toggle = () => setModal(!modal);
@@ -48,8 +48,20 @@ const Saved = () => {
   const modalSubmit = (id) => {
     console.log(id);
     let token = localStorage.getItem("token");
-    API.emailTrans(id, token);
+    API.msgTrans(id, token, msgState.msgRecip).then(()=>{
+      setMsgState({
+        transId: "",
+        msgRecip: ""
+      })
+    })
   };
+  const handleInputChange = (e) => {
+    const {name, value} = e.target;
+    console.log(name, "  ", value);
+    setMsgState({
+      ...msgState, [name]: value
+    })
+  }
 
   const changeFav = (id, favState) => {
     let token = localStorage.getItem("token");
@@ -98,11 +110,12 @@ const Saved = () => {
       </Row>
       <Row>
         <Col>
-          <EmailModal
+          <MsgModal
+            handleInputChange={handleInputChange}
             modalSubmit={modalSubmit}
             toggle={toggle}
             modal={modal}
-            emailState={emailState}
+            msgState={msgState}
           />
           {saved.starFiltered ? (
             <div>
@@ -112,13 +125,21 @@ const Saved = () => {
                   return (
                     <div key={trans._id}>
                       <Card>
-                        <span
-                          onClick={() => {
-                            changeFav(trans._id, trans.starred);
-                          }}
-                        >
-                          {trans.starred ? <BsStarFill /> : <BsStar />}
-                        </span>
+                      <span
+                        onClick={() => {
+                          changeFav(trans._id, trans.starred);
+                        }}
+                      >
+                        {trans.starred ? <BsStarFill /> : <BsStar />}
+                      </span>
+                      <span
+                        onClick={() => {
+                          toggle();
+                          setMsgState({ ...msgState, transId: trans._id });
+                        }}
+                      >
+                        <BiMessageAdd />
+                      </span>
                         <CardHeader>From : {trans.fromLang}</CardHeader>
                         <CardBody>Text : {trans.fromTxt}</CardBody>
                         <CardHeader>To : {trans.toLang}</CardHeader>
@@ -152,10 +173,10 @@ const Saved = () => {
                       <span
                         onClick={() => {
                           toggle();
-                          setEmailState({ ...emailState, transId: trans._id });
+                          setMsgState({ ...msgState, transId: trans._id });
                         }}
                       >
-                        <SiMinutemailer />
+                        <BiMessageAdd />
                       </span>
                       <CardHeader>From : {trans.fromLang}</CardHeader>
                       <CardBody>Text : {trans.fromTxt}</CardBody>

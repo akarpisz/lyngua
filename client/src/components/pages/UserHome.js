@@ -89,6 +89,7 @@ const UserHome = () => {
               <Button color="primary" href="/saved">See Saved Translations</Button>
               <br />
               <br />
+              <Button color="primary" href="/messages">Messages</Button>
             </CardBody>
           </Card>
         </Col>

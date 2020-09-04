@@ -2,16 +2,10 @@ const express = require("express");
 const router = express.Router();
 const db = require("../models");
 const axios = require("axios");
-const { User, Translation } = require("../models");
+const { User, Translation, Message } = require("../models");
 const jwt = require("jsonwebtoken");
 const { v4: uuidv4 } = require("uuid");
-const nodemailer = require("nodemailer");
-//const transporter = nodemailer.createTransport(/*transport, defaults*/);
 
-
-const mailTrans = () => {
-
-}
 
 const validateToken = (req, res, next) => {
   const authHeader = req.headers["authorization"];
@@ -102,26 +96,32 @@ router.post("/newtrans", checkToken, async (req, res) => {
       }
       return result;
     });
-    console.log(JSON.stringify(data[0].translations[0].text));
-    console.log(JSON.stringify(data[0].translations[0].to));
-
-    //db.Translation.create();
+    
     return res.json(data);
-    //data needs JSON.stringify()
+  
   } catch (err) {
     console.log(err);
     return err;
   }
 });
 
-//email a chosen translation
-router.post("/email", checkToken, (req, res)=>{
+//send a chosen translation
+router.post("/msgexisting", checkToken, (req, res)=>{
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];
   const decoded = jwt.verify(token, process.env.SECRET);
-  console.log(req.body.id);
+  console.log(req.body);
 
-  // return res.send(req.body);
+db.Translation.findOne({ _id:req.body.id, username: decoded.user.username, user_id: decoded.user._id}, (err, data)=>{
+  if(err){
+    return res.status(500).send("DB error");
+  }
+  return data;
+}).then((res)=>{
+  const {username, toTxt} = res; //username toTxt
+  
+});
+
 })
 
 router.get("/supportedlangs", async (req, res) => {
@@ -249,9 +249,13 @@ router.post("/login", function (req, res) {
 
 // //message routes (*deep breaths*)
 // //user getting their messages
-// router.get("/api/messages/:userid", (req,res)=>{
+router.get("/usermsgs", checkToken, (req,res)=>{
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1];
+  const decoded = jwt.decode(token);
 
-// });
+  
+});
 
 // //user new message
 // router.post("/api/messages/:to/:from", (req, res)=>{

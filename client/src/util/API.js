@@ -64,20 +64,33 @@ export default {
     };
     return axios(config);
   },
-  emailTrans: function (id, token) {
+  msgTrans: function (id, token, recip) {
     
     const config = {
       method: "POST",
-      url: "/api/email",
+      url: "/api/msgexisting",
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json"
       },
       data: {
-        id: id
+        id: id,
+        recip: recip
       },
     };
   
     return axios(config);
+  },
+
+  getMsgs: function (token) {
+    const config ={
+      method: "GET",
+      url: "/api/usermsgs",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+      },
+    }
+    return axios(config)
   }
 };

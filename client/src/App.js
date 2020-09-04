@@ -8,6 +8,7 @@ import NewTrans from './components/pages/NewTrans';
 import Saved from './components/pages/Saved';
 import {Container} from 'reactstrap';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Messages from "./components/pages/Messages";
 
 
 
@@ -41,6 +42,9 @@ function App() {
         </Route>
         <Route path="/saved">
         <Saved/>
+        </Route>
+        <Route path="/messages">
+          <Messages/>
         </Route>
         </Switch>
       </Router>
