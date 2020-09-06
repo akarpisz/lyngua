@@ -1,12 +1,12 @@
 import React from "react";
 import TopMenu from "../src/components/Navbar";
-import Login from './components/pages/Login';
+import Login from "./components/pages/Login";
 import Home from "./components/pages/Home/Home";
-import Signup from './components/pages/Signup';
-import UserHome from './components/pages/UserHome';
-import NewTrans from './components/pages/NewTrans';
-import Saved from './components/pages/Saved';
-import {Container} from 'reactstrap';
+import Signup from "./components/pages/Signup";
+import UserHome from "./components/pages/UserHome";
+import NewTrans from "./components/pages/NewTrans";
+import Saved from "./components/pages/Saved";
+import {Container} from "reactstrap";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Messages from "./components/pages/Messages";
 

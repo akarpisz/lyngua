@@ -45,9 +45,9 @@ export default {
       },
       data: {
         id: transID,
-        newState: newFavState
+        newState: newFavState,
       },
-    }
+    };
     return axios(config);
   },
   deleteTrans: function (token, transID) {
@@ -56,41 +56,52 @@ export default {
       url: "/api/deltrans",
       headers: {
         Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       data: {
-        id: transID
+        id: transID,
       },
     };
     return axios(config);
   },
   msgTrans: function (id, token, recip) {
-    
     const config = {
       method: "POST",
       url: "/api/msgexisting",
       headers: {
         Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       data: {
         id: id,
-        recip: recip
+        recip: recip,
       },
     };
-  
+
     return axios(config);
   },
 
   getMsgs: function (token) {
-    const config ={
+    const config = {
       method: "GET",
       url: "/api/usermsgs",
       headers: {
         Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
+    };
+    return axios(config);
+  },
+  newMsg: function (token, msg) {
+    const config = {
+
     }
-    return axios(config)
+    return axios(config);
+  },
+  deleteMsg:  function () {
+    const config = {
+
+    }
+    return axios(config);
   }
 };

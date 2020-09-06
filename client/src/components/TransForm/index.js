@@ -13,6 +13,8 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "reactstrap";
+
+
 const TransForm = ({ transText, handleInputChange, handleSubmit, supportedLang }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 

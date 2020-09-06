@@ -102,4 +102,9 @@ div.drop.dropdown-menu {
   background-color:rgb(14, 3, 114);
    font-weight: bold;
  }
+
+ #msgDiv {
+    overflow-y: auto;
+    height: 100%;
+ }
  
