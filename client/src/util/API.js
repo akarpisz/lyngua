@@ -92,16 +92,34 @@ export default {
     };
     return axios(config);
   },
-  newMsg: function (token, msg) {
+  newMsg: function (token, msg, recip, toLang) {
     const config = {
-
+      method: "POST",
+      url: "/api/usermsgs",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      data: {
+        msg: msg,
+        recip: recip,
+        lang: toLang
+      }
     }
     return axios(config);
   },
-  deleteMsg:  function () {
+  deleteMsg:  function (id, token) {
     const config = {
-
-    }
+      method: "DELETE",
+      url: "/api/usermsgs",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      data: {
+        id: id
+      }
+    };
     return axios(config);
   }
+
 };

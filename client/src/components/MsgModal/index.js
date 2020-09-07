@@ -11,7 +11,7 @@ import {
 import {BiMessageAdd} from 'react-icons/bi';
 
 const MsgModal = (props) => {
-  const { handleInputChange,modalSubmit, toggle, modal, msgState } = props;
+  const { handleInputChange,modalSubmit, toggle, modal, msgState, cancelMsg } = props;
   return (
     <div>
       <Modal isOpen={modal} toggle={toggle}>
@@ -31,7 +31,7 @@ const MsgModal = (props) => {
           >
             <BiMessageAdd/>
           </Button>{" "}
-          <Button color="secondary" onClick={toggle}>
+          <Button color="secondary" onClick={()=>{toggle(); cancelMsg()}}>
             Cancel
           </Button>
         </ModalFooter>

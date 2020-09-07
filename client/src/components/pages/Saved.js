@@ -16,6 +16,7 @@ import MsgModal from "../MsgModal";
 //use 'react-icons library for fav-stars!
 
 const Saved = () => {
+
   const [saved, setSaved] = useState({
     translations: [],
     received: false,
@@ -25,12 +26,12 @@ const Saved = () => {
     window.location.reload(false);
   };
 
-  const [modal, setModal] = useState(false);
   const [msgState, setMsgState] = useState({
     transId: "",
     msgRecip: "",
   });
 
+  const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
 
   useEffect(() => {
@@ -44,34 +45,46 @@ const Saved = () => {
       });
     });
   }, []);
-
+  const cancelMsg = () => {
+    setMsgState({
+      transId: "",
+      msgRecip: "",
+    });
+  };
   const modalSubmit = (id) => {
     console.log(id);
     let token = localStorage.getItem("token");
-    API.msgTrans(id, token, msgState.msgRecip).then(()=>{
+    API.msgTrans(id, token, msgState.msgRecip).then(() => {
       setMsgState({
         transId: "",
-        msgRecip: ""
-      })
-    })
+        msgRecip: "",
+      });
+    });
   };
   const handleInputChange = (e) => {
-    const {name, value} = e.target;
+    const { name, value } = e.target;
     console.log(name, "  ", value);
     setMsgState({
-      ...msgState, [name]: value
-    })
-  }
+      ...msgState,
+      [name]: value,
+    });
+  };
+
+
 
   const changeFav = (id, favState) => {
     let token = localStorage.getItem("token");
     let newState = !favState;
-
+    //if we find a way to edit an object by index in state, use this to find index:
+    //let index = saved.translations.findIndex(trans => trans._id === id)
+    //console.log(index)
+    
     API.updateTrans(token, id, newState).then((res) => {
-      if (res.status) {
+      if (res.status === 200) {
         refreshPage();
       }
     });
+
   };
 
   const handleFavSort = () => {
@@ -84,12 +97,17 @@ const Saved = () => {
 
   const delTrans = (id) => {
     console.log(id);
+
+    setSaved({
+      ...saved,
+      translations: saved.translations.filter((trans) => trans._id !== id),
+    });
     let token = localStorage.getItem("token");
 
     API.deleteTrans(token, id).then((res) => {
       console.log(res);
       if (res.status === 200) {
-        refreshPage();
+        console.log("deleted translation");
       }
     });
   };
@@ -116,6 +134,7 @@ const Saved = () => {
             toggle={toggle}
             modal={modal}
             msgState={msgState}
+            cancelMsg={cancelMsg}
           />
           {saved.starFiltered ? (
             <div>
@@ -125,21 +144,21 @@ const Saved = () => {
                   return (
                     <div key={trans._id}>
                       <Card>
-                      <span
-                        onClick={() => {
-                          changeFav(trans._id, trans.starred);
-                        }}
-                      >
-                        {trans.starred ? <BsStarFill /> : <BsStar />}
-                      </span>
-                      <span
-                        onClick={() => {
-                          toggle();
-                          setMsgState({ ...msgState, transId: trans._id });
-                        }}
-                      >
-                        <BiMessageAdd />
-                      </span>
+                        <span
+                          onClick={() => {
+                            changeFav(trans._id, trans.starred);
+                          }}
+                        >
+                          {trans.starred ? <BsStarFill /> : <BsStar />}
+                        </span>
+                        <span
+                          onClick={() => {
+                            toggle();
+                            setMsgState({ ...msgState, transId: trans._id });
+                          }}
+                        >
+                          <BiMessageAdd />
+                        </span>
                         <CardHeader>From : {trans.fromLang}</CardHeader>
                         <CardBody>Text : {trans.fromTxt}</CardBody>
                         <CardHeader>To : {trans.toLang}</CardHeader>
