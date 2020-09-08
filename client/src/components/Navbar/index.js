@@ -15,6 +15,7 @@ import {
   DropdownItem,
   //NavbarText
 } from "reactstrap";
+//import LoginContext from "../../util/LoginContext";
 
 const TopMenu = (props) => {
   const [isOpen, setIsOpen] = useState(false);

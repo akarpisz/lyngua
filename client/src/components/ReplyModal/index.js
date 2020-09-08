@@ -89,6 +89,7 @@ const ReplyModal = (props) => {
             onClick={() => {
               handleReply();
               toggleModal();
+              clearOutgoing();
             }}
           >
             <MdSend />

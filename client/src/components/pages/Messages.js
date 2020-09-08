@@ -69,6 +69,7 @@ const Messages = () => {
       recip: "",
       toLang: "",
       fromTxt: "",
+      newNotReply: false
     });
   };
 
