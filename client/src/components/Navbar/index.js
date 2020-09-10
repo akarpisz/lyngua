@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import navbarL from "../images/navbarL.png";
 import {
@@ -15,36 +15,70 @@ import {
   DropdownItem,
   //NavbarText
 } from "reactstrap";
-//import LoginContext from "../../util/LoginContext";
+
 
 const TopMenu = (props) => {
+  const {login, setLogin} = props;
   const [isOpen, setIsOpen] = useState(false);
+
 
   const style = {
     color: "white",
   };
   const toggle = () => setIsOpen(!isOpen);
-  //const { id } = useParams();
+
   return (
     <div>
-      
-        <Navbar color="dark" light expand="md">
-          <NavbarBrand id="brand" href="/">
-              <img src={navbarL} alt="logo L" id="nav-L" />
-              yngua
-          </NavbarBrand>
-          <NavbarToggler onClick={toggle} />
-          <Collapse isOpen={isOpen} navbar>
-            <Nav className="mr-auto" navbar>
-              <NavItem>
-                <NavLink style={style} href="https://github.com/akarpisz/">
-                  Drew's GitHub
-                </NavLink>
-              </NavItem>
-              <UncontrolledDropdown nav inNavbar>
+      <Navbar color="dark" light expand="md">
+        <NavbarBrand id="brand" href="/">
+          <img src={navbarL} alt="logo L" id="nav-L" />
+          yngua
+        </NavbarBrand>
+        <NavbarToggler onClick={toggle} />
+        <Collapse isOpen={isOpen} navbar>
+          <Nav className="mr-auto" navbar>
+            <NavItem>
+              <NavLink style={style} href="https://github.com/akarpisz/">
+                Drew's GitHub
+              </NavLink>
+            </NavItem>
+            <UncontrolledDropdown nav inNavbar>
+              
+              {login ? (
+                <>
                 <DropdownToggle style={style} nav caret>
-                  Menu
-                </DropdownToggle>
+                Welcome
+              </DropdownToggle>
+                <DropdownMenu className="drop" right>
+                  <DropdownItem>
+                    <NavItem>
+                      <NavLink tag={Link} id="navuserhome"to="/userhome">
+                        Home
+                      </NavLink>
+                    </NavItem>
+                  </DropdownItem>
+                  <DropdownItem>
+                    <NavItem>
+                      <NavLink tag={Link} id="navmsgs" to="/messages">
+                        Messages
+                      </NavLink>
+                    </NavItem>
+                  </DropdownItem>
+                  <DropdownItem>
+                    <NavItem>
+                      <NavLink tag={Link} id="navsaved" to="/saved">
+                        Saved Translations
+                      </NavLink>
+                    </NavItem>
+                  </DropdownItem>
+                  <DropdownItem divider />
+                </DropdownMenu>
+                </>
+              ) : (
+                <>
+                <DropdownToggle style={style} nav caret>
+                Menu
+              </DropdownToggle>
                 <DropdownMenu className="drop" right>
                   <DropdownItem>
                     <NavItem>
@@ -61,21 +95,16 @@ const TopMenu = (props) => {
                     </NavItem>
                   </DropdownItem>
                   <DropdownItem>
-                    <NavItem>
-
-                      {/* https://reactrouter.com/web/example/auth-workflow */}
-                      {/* <NavLink tag={Link} to={`/user/:id`}>
-                        User Home
-                      </NavLink> */}
-                    </NavItem>
+                    <NavItem></NavItem>
                   </DropdownItem>
                   <DropdownItem divider />
                 </DropdownMenu>
-              </UncontrolledDropdown>
-            </Nav>
-          </Collapse>
-        </Navbar>
-    
+                </>
+              )}
+            </UncontrolledDropdown>
+          </Nav>
+        </Collapse>
+      </Navbar>
     </div>
   );
 };

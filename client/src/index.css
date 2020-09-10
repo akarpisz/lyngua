@@ -107,4 +107,17 @@ div.drop.dropdown-menu {
     overflow-y: auto;
     height: 100%;
  }
+
+ #navsaved {
+  color: white;
+  background-color: rgb(33, 37, 41);
+ }
+#navmsgs {
+  color: white;
+  background-color: rgb(33, 37, 41);
+}
+#navuserhome {
+  color: white;
+  background-color: rgb(33, 37, 41);
+}
  

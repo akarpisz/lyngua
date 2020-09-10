@@ -75,16 +75,10 @@ const Saved = () => {
   const changeFav = (id, favState) => {
     let token = localStorage.getItem("token");
     let newState = !favState;
-    // //if we find a way to edit an object by index in state, use this to find index:
-    // //let index = saved.translations.findIndex(trans => trans._id === id)
-    // //console.log(index)
-    // console.log(saved.translations.some(t => t._id === id));
-    // console.log(saved.translations.findIndex(t => t._id === id))
 
     let updatedTrans = saved.translations.map(trans=> {
       if (trans._id === id){
         trans.starred = newState
-        console.log(trans.starred);
         return trans
       } else {
         return trans

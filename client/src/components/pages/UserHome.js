@@ -11,8 +11,8 @@ import {
   Button,
 } from "reactstrap";
 
-const UserHome = () => {
-  
+const UserHome = (props) => {
+  const { login, setLogin } = props;
   const history = useHistory();
   const [userInfo, setUserInfo] = useState({
     id: "",
@@ -37,13 +37,10 @@ const UserHome = () => {
       });
     });
   }, []);
-  //remove at some point
-  useEffect(() => {
-    console.log(userInfo);
-  }, [userInfo]);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    setLogin(false);
     history.push("/");
   };
 
@@ -84,10 +81,14 @@ const UserHome = () => {
               </Button>
               <br />
               <br />
-              <Button color="primary" href="/saved">See Saved Translations</Button>
+              <Button color="primary" href="/saved">
+                See Saved Translations
+              </Button>
               <br />
               <br />
-              <Button color="primary" href="/messages">Messages</Button>
+              <Button color="primary" href="/messages">
+                Messages
+              </Button>
             </CardBody>
           </Card>
         </Col>
