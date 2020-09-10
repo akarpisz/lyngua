@@ -22,7 +22,7 @@
   "bugs": {
     "url": "https://github.com/akarpisz/lyngua/issues"
   },
-  "homepage": "https://github.com/akarpisz/lyngua#readme",
+  "homepage": "https://lyngua.herokuapp.com",
   "dependencies": {
     "axios": "^0.19.2",
     "bcrypt": "^5.0.0",
