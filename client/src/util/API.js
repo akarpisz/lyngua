@@ -3,7 +3,12 @@ import axios from "axios";
 export default {
   addUser: function (newUser) {
     console.log(newUser);
-    return axios.post("/api/signup", newUser);
+    return axios.post("/api/signup", {newUser}, {
+      //heroku test
+      headers: {
+        "Access-Control-Allow-Origin": "*"
+      }
+    });
   },
   getUserInfo: function (token) {
     return axios.get("/api/getuser", {
