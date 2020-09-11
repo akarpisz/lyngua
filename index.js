@@ -29,7 +29,6 @@ app.use(cors());
 // 	methods: "GET, POST, PATCH, PUT, POST, DELETE, OPTIONS"
 // }));
 
-//change to client/build for production
 app.use(express.static(path.join(__dirname, "client/build")));
 app.use(express.urlencoded({ extended: true}));
 app.use(express.json());

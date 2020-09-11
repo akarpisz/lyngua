@@ -10,6 +10,7 @@ import {
   CardBody,
   Button,
 } from "reactstrap";
+import welcome from "../images/welcome.png";
 
 const UserHome = (props) => {
   const { login, setLogin } = props;
@@ -51,12 +52,12 @@ const UserHome = (props) => {
       <Row>
         <Col md="6" xs="12" id="userleft">
           <Jumbotron className="text-center" id="userwelcome">
-            Welcome {username}!
+          <img src={welcome} width="55%" alt="welcome"/>
           </Jumbotron>
-          <Card>
+          <Card style={{backgroundColor: "#82b6ff"}}>
             <CardTitle className="text-center">Your Info:</CardTitle>
             <CardBody>
-              <span>User ID: {id}</span>
+        
               <br />
               <span>First Name: {firstName}</span>
               <br />
@@ -68,7 +69,7 @@ const UserHome = (props) => {
           </Card>
         </Col>
         <Col md="6" xs="12" id="userright">
-          <Card>
+          <Card style={{backgroundColor: "#82b6ff"}}>
             <CardTitle className="text-center">Options</CardTitle>
             <CardBody>
               <Button color="info" onClick={handleLogout}>
@@ -93,6 +94,7 @@ const UserHome = (props) => {
           </Card>
         </Col>
       </Row>
+      
     </div>
   );
 };
