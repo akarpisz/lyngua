@@ -54,7 +54,7 @@ const UserHome = (props) => {
           <Jumbotron className="text-center" id="userwelcome">
           <img src={welcome} width="55%" alt="welcome"/>
           </Jumbotron>
-          <Card style={{backgroundColor: "#82b6ff"}}>
+          <Card style={{backgroundColor: "blue", color:"white"}}>
             <CardTitle className="text-center">Your Info:</CardTitle>
             <CardBody>
         
@@ -69,7 +69,7 @@ const UserHome = (props) => {
           </Card>
         </Col>
         <Col md="6" xs="12" id="userright">
-          <Card style={{backgroundColor: "#82b6ff"}}>
+          <Card style={{backgroundColor: "blue", color:"white"}}>
             <CardTitle className="text-center">Options</CardTitle>
             <CardBody>
               <Button color="info" onClick={handleLogout}>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import API from "../../util/API";
 import { BsStar, BsStarFill, BsTrash } from "react-icons/bs";
 import { BiMessageAdd } from "react-icons/bi";
+import FadeIn from "react-fade-in";
 import {
   Col,
   Row,
@@ -103,7 +104,6 @@ const Saved = () => {
   };
 
   const delTrans = (id) => {
-    console.log(id);
 
     setSaved({
       ...saved,
@@ -123,8 +123,10 @@ const Saved = () => {
     <>
       <Row>
         <Col>
-          <Jumbotron>
-            <span>Saved Translations</span>
+          <Jumbotron style={{backgroundColor: "blue", color: "white"}}>
+            <FadeIn delay="750">
+            <h3>Saved Translations</h3>
+            </FadeIn>
           </Jumbotron>
         </Col>
       </Row>
@@ -151,31 +153,39 @@ const Saved = () => {
                   return (
                     <div key={trans._id}>
                       <Card>
-                        <span
+                      <span>
+                        <Button color={trans.starred ? "success": "info"}
                           onClick={() => {
                             changeFav(trans._id, trans.starred);
                           }}
                         >
                           {trans.starred ? <BsStarFill /> : <BsStar />}
+                        </Button>
                         </span>
-                        <span
+                        <span>
+                        <Button
+                        color="primary"
                           onClick={() => {
                             toggle();
                             setMsgState({ ...msgState, transId: trans._id });
                           }}
                         >
                           <BiMessageAdd />
+                        </Button>
                         </span>
                         <CardHeader>From : {trans.fromLang}</CardHeader>
                         <CardBody>Text : {trans.fromTxt}</CardBody>
                         <CardHeader>To : {trans.toLang}</CardHeader>
                         <CardBody>{trans.toTxt}</CardBody>
-                        <span
+                        <span>
+                        <Button
+                        color="danger"
                           onClick={() => {
                             delTrans(trans._id);
                           }}
                         >
                           <BsTrash />
+                        </Button>
                         </span>
                       </Card>
                       <br />
@@ -189,31 +199,39 @@ const Saved = () => {
                 return (
                   <div key={trans._id}>
                     <Card>
-                      <span
+                      <span>
+                      <Button color={trans.starred ? "success": "info"}
                         onClick={() => {
                           changeFav(trans._id, trans.starred);
                         }}
                       >
                         {trans.starred ? <BsStarFill /> : <BsStar />}
+                      </Button>
                       </span>
-                      <span
+                      <span>
+                      <Button
+                      color="primary"
                         onClick={() => {
                           toggle();
                           setMsgState({ ...msgState, transId: trans._id });
                         }}
                       >
                         <BiMessageAdd />
+                      </Button>
                       </span>
+
                       <CardHeader>From : {trans.fromLang}</CardHeader>
                       <CardBody>Text : {trans.fromTxt}</CardBody>
                       <CardHeader>To : {trans.toLang}</CardHeader>
                       <CardBody>{trans.toTxt}</CardBody>
-                      <span
+                      <span>
+                      <Button color="danger"
                         onClick={() => {
                           delTrans(trans._id);
                         }}
                       >
                         <BsTrash />
+                      </Button>
                       </span>
                     </Card>
                     <br />

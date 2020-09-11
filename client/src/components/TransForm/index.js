@@ -6,7 +6,6 @@ import {
   Label,
   Input,
   Card,
-  CardHeader,
   CardBody,
   Dropdown,
   DropdownToggle,
@@ -15,14 +14,14 @@ import {
 } from "reactstrap";
 
 
-const TransForm = ({ transText, handleInputChange, handleSubmit, supportedLang }) => {
+const TransForm = ({ transState,transText, handleInputChange, handleSubmit, supportedLang }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const toggle = () => setDropdownOpen((prevState) => !prevState);
   return (
     <>
-      <Card>
-            <CardHeader></CardHeader>
+      <Card style={{backgroundColor:"blue", color: "white"}}>
+            
             <CardBody>
               <Form onSubmit={handleSubmit}>
                 <FormGroup>
@@ -36,8 +35,8 @@ const TransForm = ({ transText, handleInputChange, handleSubmit, supportedLang }
                 </FormGroup>
                 <FormGroup>
                   <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-                    <DropdownToggle color="primary" caret>Languages</DropdownToggle>
-                    <DropdownMenu onClick={handleInputChange}>
+  <DropdownToggle color="primary" caret>{transState.toLang}</DropdownToggle>
+                    <DropdownMenu style={{overflowY:"scroll", height:"10em"}}onClick={handleInputChange}>
                       {Object.entries(supportedLang).map((lang) => {
                         return (
                           <DropdownItem

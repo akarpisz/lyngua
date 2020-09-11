@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Form, Input, Label, Button, Row, Col, Card } from "reactstrap";
+import { Form, Input, Label, Button, Row, Col } from "reactstrap";
 import API from "../../util/API";
 
 const Login = (props) => {
   const history = useHistory();
 
-  const { login, setLogin } = props;
+  const { setLogin } = props;
 
   const [loginState, setLoginState] = useState({
     username: "",

@@ -51,9 +51,12 @@ const NewTrans = () => {
   return (
     <div id="trans-div">
       <Row>
+        
         <Col md={2} xs={0} />
         <Col md={8} xs={12}>
+        <br/>
           <TransForm
+            transState={transState}
             supportedLang={transState.supported}
             handleSubmit={handleSubmit}
             handleInputChange={handleInputChange}

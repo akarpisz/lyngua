@@ -71,7 +71,7 @@ const ReplyModal = (props) => {
                 <DropdownToggle color="primary" caret>
                   {outgoing.toLang}
                 </DropdownToggle>
-                <DropdownMenu style={{overflowY: "auto"}} onClick={handleInputChange}>
+                <DropdownMenu style={{overflowY:"scroll", height:"10em"}} onClick={handleInputChange}>
                   {langs.map((lang) => {
                     return (
                       <DropdownItem name="toLang" value={lang[0]} key={lang[0]}>
