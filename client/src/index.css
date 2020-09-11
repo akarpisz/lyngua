@@ -53,6 +53,8 @@ div.drop.dropdown-menu {
   height: 75%;
   width: 75%;
   align-content: center;
+  margin: 1em;
+  padding: 1em;
 }
 #signup {
   color: white;
@@ -81,13 +83,12 @@ div.drop.dropdown-menu {
   height:100%;
 }
 .intro {
-  padding: 0.5em;
+  padding: 2em;
   border-style: groove;
   border-radius: 20%;
   color: white;
   background-color: black;
   font-family: 'Russo One';
-  /* margin: .25rem, .25rem, .25rem, .25rem; */
 }
  #userhome {
    background-color: white;
@@ -119,5 +120,9 @@ div.drop.dropdown-menu {
 #navuserhome {
   color: white;
   background-color: rgb(33, 37, 41);
+}
+#loginform {
+  height: 10em;
+  color: white;
 }
  
