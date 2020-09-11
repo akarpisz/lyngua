@@ -2,6 +2,7 @@ import axios from "axios";
 
 export default {
   addUser: function (newUser) {
+    console.log(newUser);
     return axios.post("/api/signup", newUser);
   },
   getUserInfo: function (token) {
