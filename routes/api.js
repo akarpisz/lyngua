@@ -253,7 +253,7 @@ router.post("/api/signup", (req, res) => {
 });
 
 //user signin
-router.post("/login", function (req, res) {
+router.post("/api/login", function (req, res) {
 	//console.log(req.body);
 	const { username } = req.body;
 	const { password } = req.body;
