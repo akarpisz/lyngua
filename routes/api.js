@@ -239,7 +239,7 @@ router.get("/getuser", validateToken, (req, res) => {
 // })
 
 // //create new user
-router.post("/signup", (req, res) => {
+router.post("/api/signup", (req, res) => {
 	let newUser = new User(req.body);
 
 	db.User.create(newUser, (err, result) => {
