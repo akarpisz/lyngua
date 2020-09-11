@@ -35,7 +35,9 @@ app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
 app.use(logger("dev"));
 app.use("/api", api);
-
+app.get("*", (req, res)=>{
+	return res.sendFile(path.join(__dirname, "client/build/index.html"))
+});
 
 app.listen(PORT, ()=>{
 	console.log(`App started, server listening on port ${PORT}`);
