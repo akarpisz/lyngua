@@ -140,7 +140,7 @@ router.post("/msgexisting", checkToken, (req, res) => {
 			read: false,
 		};
 
-		db.Message.create(msg, (err, result) => {
+		db.Message.create(msg, (err) => {
 			if (err) {
 				//console.log(err);
 				return res.status(500).send("error sending message");
