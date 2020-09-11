@@ -22,9 +22,7 @@ const Saved = () => {
     received: false,
     starFiltered: false,
   });
-  const refreshPage = () => {
-    window.location.reload(false);
-  };
+  
 
   const [msgState, setMsgState] = useState({
     transId: "",

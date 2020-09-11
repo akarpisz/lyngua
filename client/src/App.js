@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import TopMenu from "../src/components/Navbar";
 import Login from "./components/pages/Login";
-import Home from "./components/pages/Home/Home";
+import Home from "./components/pages/Home";
 import Signup from "./components/pages/Signup";
 import UserHome from "./components/pages/UserHome";
 import NewTrans from "./components/pages/NewTrans";

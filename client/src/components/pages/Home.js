@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import translate from "../../images/translate.jpg";
+import translate from "../images/translate.jpg";
 import { Card, CardText, Jumbotron, Row, Col } from "reactstrap";
 
 const Home = () => {
