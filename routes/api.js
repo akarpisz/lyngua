@@ -239,12 +239,12 @@ router.get("/getuser", validateToken, (req, res) => {
 // })
 
 // //create new user
-router.post("/api/signup", (req, res) => {
+router.post("/signup", (req, res) => {
 	let newUser = new User(req.body);
 
 	db.User.create(newUser, (err, result) => {
 		if (err) {
-			//console.log(err);
+			console.log(err);
 			return res.status(500).send("problem creating new user");
 		}
 		//console.log(result);
