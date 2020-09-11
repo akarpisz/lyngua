@@ -1,4 +1,4 @@
 {
-    "root": "/app/index.js"
+    "root": "/app/client/build/"
     
 }
