@@ -253,7 +253,7 @@ router.post("/signup", (req, res) => {
 });
 
 //user signin
-router.post("/api/login", function (req, res) {
+router.post("/login", function (req, res) {
 	//console.log(req.body);
 	const { username } = req.body;
 	const { password } = req.body;
@@ -289,12 +289,9 @@ router.post("/api/login", function (req, res) {
 	});
 });
 
-// //message routes (*deep breaths*)
+
 // //user getting their messages
 router.get("/usermsgs", checkToken, (req, res) => {
-	// const authHeader = req.headers["authorization"];
-	// const token = authHeader && authHeader.split(" ")[1];
-	// const decoded = jwt.decode(token);
 	let decoded = extractUser(req);
 	db.Message.find({ receiver: decoded.user.username }, (err, data) => {
 		if (err) {
