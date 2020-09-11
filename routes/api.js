@@ -254,7 +254,7 @@ router.post("/signup", (req, res) => {
 
 //user signin
 router.post("/login", function (req, res) {
-	//console.log(req.body);
+	
 	const { username } = req.body;
 	const { password } = req.body;
 
@@ -263,10 +263,10 @@ router.post("/login", function (req, res) {
 			if (err) {
 				throw err;
 			}
-			//console.log(user);
+			
 			let match = await user.comparePass(password);
 
-			//console.log(` match : ${match}`);
+			
 			if (match) {
 				jwt.sign(
 					{ user },

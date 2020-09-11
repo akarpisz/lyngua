@@ -12,12 +12,12 @@ require("dotenv").config(path.join(__dirname, "/.env"));
 const cors = require("cors");
 
 
-mongoose.set("useCreateIndex", true);
-mongoose.set("useCreateIndex", true);
-mongoose.set("useUnifiedTopology", true);
-mongoose.set("useNewUrlParser", true);
-mongoose.set("useFindAndModify", false);
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/lyngua");
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/lyngua", {
+	useNewUrlParser: true,
+	useUnifiedTopology: true,
+	useCreateIndex: true,
+	useFindAndModify: false,
+});
 
 
 app.use(cors());
@@ -35,8 +35,8 @@ app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
 app.use(logger("dev"));
 app.use("/api", api);
-app.get("*", (req, res)=>{
-	return res.sendFile(path.join(__dirname, "client/build/index.html"))
+app.get("/*", (req, res)=>{
+	return res.sendFile(path.join(__dirname, "client/build/index.html"));
 });
 
 app.listen(PORT, ()=>{
