@@ -10,6 +10,7 @@ import { Container } from "reactstrap";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Messages from "./components/pages/Messages";
 import Footer from "./components/Footer";
+import About from "./components/pages/About";
 function App() {
   const [login, setLogin] = useState(false);
   useEffect(() => {
@@ -50,6 +51,9 @@ function App() {
             </Route>
             <Route path="/messages">
               <Messages />
+            </Route>
+            <Route path="/about">
+              <About/>
             </Route>
           </Switch>
         </Router>

@@ -28,13 +28,12 @@ const Home = () => {
           <Card>
             <CardText className="intro">
               Are you a polyglot, linguaphile, learning a new language, or have
-              friends/family that doesn't speak english? Then this is the place
+              friends or family that don't speak english? Then this is the place
               for you. Translate to more than 60 languages with the Microsoft
-              Translate API. Save your translations, email them to yourself or
-              others, and send translated messages to other users!
+              Translate API. Translate text, Save your translations, and send translated messages to other users!
               <br />
               <br />
-              Hit signup if you are new, or login if you've been here before!
+              Hit signup if you are new to Lyngua, or login if you've been here before.
             </CardText>
           </Card>
         </Col>

@@ -125,9 +125,9 @@ const TopMenu = (props) => {
     <Nav className="navbar navbar-expand-lg navbar-dark bg-dark">
   <a className="navbar-brand" style={{color:"#3498db"}} href="/"><img src={navbarL} alt="logo L" id="nav-L" />
           yngua</a>
-  {/* <Button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-    <span className="navbar-toggler-icon"></span>
-  </Button> */}
+          <NavLink tag={Link} to="/about">
+                About
+              </NavLink>
   <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} className="collapse navbar-collapse" id="navbarColor02" navbar>
           <Nav className="mr-auto" navbar>
@@ -197,9 +197,7 @@ const TopMenu = (props) => {
                 </>
               )}
             </UncontrolledDropdown>
-            {/* <NavLink style={style} href="https://github.com/akarpisz/">
-                Drew's GitHub
-              </NavLink> */}
+            
             </NavItem>
           </Nav>
         </Collapse>
