@@ -86,6 +86,7 @@ const ReplyModal = (props) => {
         </ModalBody>
         <ModalFooter>
           <Button
+          color="success"
             onClick={() => {
               handleReply();
               toggleModal();
@@ -96,6 +97,7 @@ const ReplyModal = (props) => {
           </Button>{" "}
           |{" "}
           <Button
+          color="outline-danger"
             onClick={() => {
               toggleModal();
               clearOutgoing();

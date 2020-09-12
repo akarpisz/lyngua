@@ -162,7 +162,7 @@ const Saved = () => {
                           {trans.starred ? <BsStarFill /> : <BsStar />}
                         </Button>
                         </span>
-                        <br/>
+                      
                         <span>
                         <Button
                         color="primary"
@@ -209,7 +209,7 @@ const Saved = () => {
                         {trans.starred ? <BsStarFill /> : <BsStar />}
                       </Button>
                       </span>
-                      
+                    
                       <span>
                       <Button
                       color="primary"

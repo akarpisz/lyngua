@@ -22,7 +22,7 @@ const MsgModal = (props) => {
         </ModalBody>
         <ModalFooter>
           <Button
-            color="primary"
+            color="success"
             type="submit"
             onClick={() => {
               toggle();
@@ -31,7 +31,7 @@ const MsgModal = (props) => {
           >
             <BiMessageAdd/>
           </Button>{" "}
-          <Button color="secondary" onClick={()=>{toggle(); cancelMsg()}}>
+          <Button color="outline-danger" onClick={()=>{toggle(); cancelMsg()}}>
             Cancel
           </Button>
         </ModalFooter>
