@@ -2,10 +2,9 @@ import React, { useState, useEffect } from "react";
 import API from "../../util/API";
 import { useHistory } from "react-router-dom";
 import {
-  Jumbotron,
   Row,
   Col,
-  CardTitle,
+  CardHeader,
   Card,
   CardBody,
   Button,
@@ -13,7 +12,7 @@ import {
 import welcome from "../images/welcome.png";
 
 const UserHome = (props) => {
-  const { login, setLogin } = props;
+  const { setLogin } = props;
   const history = useHistory();
   const [userInfo, setUserInfo] = useState({
     id: "",
@@ -45,34 +44,71 @@ const UserHome = (props) => {
     history.push("/");
   };
 
-  const { username, firstName, lastName, email, id } = userInfo;
+  const { firstName, lastName, email } = userInfo;
 
   return (
     <div id="userhome">
       <Row>
         <Col md="6" xs="12" id="userleft">
-          <Jumbotron className="text-center" id="userwelcome">
-          <img src={welcome} width="55%" alt="welcome"/>
-          </Jumbotron>
-          <Card style={{backgroundColor: "blue", color:"white"}}>
-            <CardTitle className="text-center">Your Info:</CardTitle>
+          {/* <Jumbotron className="text-center" id="userwelcome"> */}
+          <img src={welcome} width="100%" alt="welcome" />
+          {/* </Jumbotron> */}
+          <br />
+          <Card>
+            <CardHeader className="text-center">
+              <h4>Your Info:</h4>
+            </CardHeader>
             <CardBody>
-        
-              <br />
-              <span>First Name: {firstName}</span>
-              <br />
-              <span>Last Name: {lastName}</span>
-              <br />
-              <span>Email: {email}</span>
-              <br />
+              <div class="form-group row">
+                <label for="staticFirstName" class="col col-form-label">
+                  First Name:
+                </label>
+                <div class="col-sm-8">
+                  <input
+                    type="text"
+                    readonly=""
+                    class="form-control-plaintext"
+                    id="staticFirstName"
+                    value={firstName}
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="staticLastNAme" class="col col-form-label">
+                  Last Name:
+                </label>
+                <div class="col-sm-8">
+                  <input
+                    type="text"
+                    readonly=""
+                    class="form-control-plaintext"
+                    id="staticLastName"
+                    value={lastName}
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="staticEmail" class="col col-form-label">
+                  Email:
+                </label>
+                <div class="col-sm-8">
+                  <input
+                    type="text"
+                    readonly=""
+                    class="form-control-plaintext"
+                    id="staticEmail"
+                    value={email}
+                  />
+                </div>
+              </div>
             </CardBody>
           </Card>
         </Col>
         <Col md="6" xs="12" id="userright">
-          <Card style={{backgroundColor: "blue", color:"white"}}>
-            <CardTitle className="text-center">Options</CardTitle>
+          <Card style={{ color: "white" }}>
+            <CardHeader className="text-center"><h4>Options</h4></CardHeader>
             <CardBody>
-              <Button color="info" onClick={handleLogout}>
+              <Button color="danger" onClick={handleLogout}>
                 Logout
               </Button>
               <br />
@@ -94,7 +130,6 @@ const UserHome = (props) => {
           </Card>
         </Col>
       </Row>
-      
     </div>
   );
 };

@@ -20,7 +20,7 @@ const TransForm = ({ transState,transText, handleInputChange, handleSubmit, supp
   const toggle = () => setDropdownOpen((prevState) => !prevState);
   return (
     <>
-      <Card style={{backgroundColor:"blue", color: "white"}}>
+      <Card>
             
             <CardBody>
               <Form onSubmit={handleSubmit}>
