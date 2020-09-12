@@ -94,7 +94,9 @@ const Messages = () => {
         <Col>
           <div id="msgDiv">
             {msgs.map((msg) => {
+              
               return (
+                <>
                 <Card key={msg._id}>
                   <CardHeader>
                     From: {msg.sender}{" "}
@@ -109,15 +111,19 @@ const Messages = () => {
                   </CardHeader>
                   <CardBody>{msg.body}</CardBody>
                   <CardFooter>
-                    <span
+                    <span><Button color="danger"
                       onClick={() => {
                         delMsg(msg._id);
                       }}
                     >
                       <ImCancelCircle />
+                      </Button>
                     </span>
                   </CardFooter>
                 </Card>
+                <br/>
+                </>
+                
               );
             })}
           </div>
