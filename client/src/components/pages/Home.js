@@ -7,7 +7,7 @@ const Home = () => {
     <div id="main">
       <Row>
         <Col>
-          <Jumbotron id="jumbotron">
+          <Jumbotron id="jumbotron" className="jumbotron">
             <FadeIn delay="1000">
             <h3 id="welcome">Welcome to Lyngua!</h3>
             </FadeIn>
@@ -16,7 +16,7 @@ const Home = () => {
       </Row>
       <Row>
         <Col md="6" xs="12">
-          <Card>
+          <Card className="text-center">
           <img
             src={translate}
             alt="translate multiple languages"
@@ -39,11 +39,7 @@ const Home = () => {
           </Card>
         </Col>
       </Row>
-      <footer style={{marginTop:"1em", paddingTop:"1em"}}>
-        <br />
-        &copy; 2020 Andrew A.K. | All Rights Reserved
-        <br />
-      </footer>
+      
     </div>
   );
 };

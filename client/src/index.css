@@ -8,25 +8,25 @@ body {
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background: rgb(14, 3, 114);
+  /* -moz-osx-font-smoothing: grayscale; */
+  /* background: rgb(14, 3, 114); */
 }
 
 #userwelcome {
-  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,126,255,1) 100%);
-  color:white;
+  /* background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,126,255,1) 100%);
+  color:white; */
   border-radius: 0%;
   font-family: 'Russo One';
 }
 
-footer {
+/* footer {
   background-color: black;
   color: grey;
 }
 
 #jumbotron {
   background-color: black;
-}
+} */
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
@@ -43,10 +43,10 @@ h3 {
 
 #brand {
   font-family: "Russo One", "Lobster";
-  color: #0a22fc;
+  /* color: #0a22fc; */
 }
 div.drop.dropdown-menu {
-  background-color: rgb(33, 37, 41);
+  /* background-color: rgb(33, 37, 41); */
 }
 
 .translate {
@@ -56,22 +56,22 @@ div.drop.dropdown-menu {
   margin: 1em;
   padding: 1em;
 }
-#signup {
+/* #signup {
   color: white;
   background-color: rgb(33, 37, 41);
 }
 #login {
   color: white;
   background-color: rgb(33, 37, 41);
-}
+} */
 #welcome {
   font-family: "Russo One", "Lobster";
   text-align: center;
   text-decoration-line: underline;
-  color: #007bff;
+  /* color: #007bff; */
 }
 #navbar {
-  background-color: rgb(33, 37, 41);
+  /* background-color: rgb(33, 37, 41); */
 }
 #nav-L {
   height: 10%;
@@ -79,28 +79,28 @@ div.drop.dropdown-menu {
   padding-bottom: 3%;
 }
 #root {
-  background: rgb(14, 3, 114);
+  /* background: rgb(14, 3, 114); */
   height:100%;
 }
 .intro {
   padding: 2em;
   border-style: groove;
   border-radius: 20%;
-  color: white;
-  background-color: black;
+  /* color: white;
+  background-color: black; */
   font-family: 'Russo One';
 }
  #userhome {
-   background-color: white;
-   color: darkblue;
+   /* background-color: white;
+   color: darkblue; */
  }
  #userleft{
-   background-color:rgb(14, 3, 114);
+   /* background-color:rgb(14, 3, 114); */
    font-weight: bold;
    /* color: white; */
  }
  #userright {
-  background-color:rgb(14, 3, 114);
+  /* background-color:rgb(14, 3, 114); */
    font-weight: bold;
  }
 
@@ -110,19 +110,19 @@ div.drop.dropdown-menu {
  }
 
  #navsaved {
-  color: white;
-  background-color: rgb(33, 37, 41);
+  /* color: white;
+  background-color: rgb(33, 37, 41); */
  }
 #navmsgs {
-  color: white;
-  background-color: rgb(33, 37, 41);
+  /* color: white;
+  background-color: rgb(33, 37, 41); */
 }
 #navuserhome {
-  color: white;
-  background-color: rgb(33, 37, 41);
+  /* color: white; */
+  /* background-color: rgb(33, 37, 41); */
 }
 #loginform {
   height: 10em;
-  color: white;
+  /* color: white; */
 }
  

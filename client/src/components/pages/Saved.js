@@ -123,7 +123,7 @@ const Saved = () => {
     <>
       <Row>
         <Col>
-          <Jumbotron style={{backgroundColor: "blue", color: "white"}}>
+          <Jumbotron style={{ color: "white"}}>
             <FadeIn delay="750">
             <h3>Saved Translations</h3>
             </FadeIn>
@@ -154,7 +154,7 @@ const Saved = () => {
                     <div key={trans._id}>
                       <Card>
                       <span>
-                        <Button color={trans.starred ? "success": "info"}
+                        <Button color={trans.starred ? "success": "outline-success"}
                           onClick={() => {
                             changeFav(trans._id, trans.starred);
                           }}
@@ -162,6 +162,7 @@ const Saved = () => {
                           {trans.starred ? <BsStarFill /> : <BsStar />}
                         </Button>
                         </span>
+                        <br/>
                         <span>
                         <Button
                         color="primary"
@@ -200,7 +201,7 @@ const Saved = () => {
                   <div key={trans._id}>
                     <Card>
                       <span>
-                      <Button color={trans.starred ? "success": "info"}
+                      <Button color={trans.starred ? "success": "outline-success"}
                         onClick={() => {
                           changeFav(trans._id, trans.starred);
                         }}
@@ -208,6 +209,7 @@ const Saved = () => {
                         {trans.starred ? <BsStarFill /> : <BsStar />}
                       </Button>
                       </span>
+                      
                       <span>
                       <Button
                       color="primary"

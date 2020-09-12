@@ -9,7 +9,7 @@ import Saved from "./components/pages/Saved";
 import { Container } from "reactstrap";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Messages from "./components/pages/Messages";
-
+import Footer from "./components/Footer";
 function App() {
   const [login, setLogin] = useState(false);
   useEffect(() => {
@@ -53,6 +53,7 @@ function App() {
             </Route>
           </Switch>
         </Router>
+        <Footer/>
       </Container>
     </div>
   );
